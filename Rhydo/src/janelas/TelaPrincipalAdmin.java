@@ -45,6 +45,7 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -82,6 +83,15 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu1.setText("Questões");
+
+        jMenuItem9.setText("Ver Questões");
+        jMenuItem9.setToolTipText("Ver todas as questões cadastradas");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem9);
 
         jMenuItem3.setText("Gerenciar Questões");
         jMenuItem3.setToolTipText("Cadastre, atualize ou exclua questões");
@@ -250,6 +260,10 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
         tdao.setTempoSub(tempo);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        new VerQuestoes().setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     private void contadorTempo() {
 
         int delay = 0;   // delay de 0 seg.
@@ -337,6 +351,7 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JLabel mostrador_tempo;
     // End of variables declaration//GEN-END:variables
 }

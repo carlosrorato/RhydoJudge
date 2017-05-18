@@ -22,15 +22,15 @@ import model.bean.Usuario;
  */
 public class UsuarioDAO {
     
-    public void adicionaScore(String login){
+    public void adicionaScore(String senha){
         
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         
         
         try {
-            stmt = con.prepareStatement("UPDATE usuario SET score = score+1 WHERE login = ?");
-            stmt.setString(1,login);
+            stmt = con.prepareStatement("UPDATE usuario SET score = score+1 WHERE senha = ?");
+            stmt.setString(1,senha);
             
             
             
@@ -48,15 +48,15 @@ public class UsuarioDAO {
     }
     
     
-    public void adicionaSubmissao(String login){
+    public void adicionaSubmissao(String senha){
         
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         
         
         try {
-            stmt = con.prepareStatement("UPDATE usuario SET totalSub = totalSub+1 WHERE login = ?");
-            stmt.setString(1,login);
+            stmt = con.prepareStatement("UPDATE usuario SET totalSub = totalSub+1 WHERE senha = ?");
+            stmt.setString(1,senha);
             
             
             

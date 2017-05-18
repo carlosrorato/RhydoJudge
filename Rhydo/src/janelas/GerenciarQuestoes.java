@@ -5,6 +5,16 @@
  */
 package janelas;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import model.bean.Questoes;
@@ -15,7 +25,14 @@ import model.dao.QuestoesDAO;
  * @author carlosrorato
  */
 public class GerenciarQuestoes extends javax.swing.JFrame {
-
+    
+    private String enunciado;
+    private String entrada1;
+    private String entrada2;
+    private String entrada3;
+    private String saida1;
+    private String saida2;
+    private String saida3;
     /**
      * Creates new form GerenciarQuestoes
      */
@@ -55,17 +72,27 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
         txtS3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaQuestoes = new javax.swing.JTable();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciar Questões");
 
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel1.setText("Enunciado:");
 
         txtEnunciado.setToolTipText("Insira o arquivo (.pdf) do enunciado da questão");
 
+        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel2.setText("Caso de Teste 1");
 
         jLabel3.setText("Entrada:");
@@ -76,6 +103,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
 
         txtS1.setToolTipText("Insira o arquivo (.txt) da saída do caso de teste 1");
 
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel5.setText("Caso de Teste 2");
         jLabel5.setToolTipText("");
 
@@ -87,6 +115,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
 
         txtS2.setToolTipText("Insira o arquivo (.txt) da saída do caso de teste 2");
 
+        jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel8.setText("Caso de Teste 3");
 
         jLabel9.setText("Entrada:");
@@ -113,24 +142,16 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Atualizar");
-        jButton3.setToolTipText("Atualizar a questão");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         TabelaQuestoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Enunciado", "Entrada 1", "Saída 1", "Entrada 2", "Saída 2", "Entrada 3", "Saída 3"
+                "Nome", "Enunciado", "Entrada 1", "Saída 1", "Entrada 2", "Saída 2", "Entrada 3", "Saída 3"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -145,69 +166,178 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TabelaQuestoes);
 
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lupa.png"))); // NOI18N
+        jButton5.setToolTipText("PEsquisar arquivo no sistema");
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lupa.png"))); // NOI18N
+        jButton6.setToolTipText("PEsquisar arquivo no sistema");
+        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lupa.png"))); // NOI18N
+        jButton7.setToolTipText("PEsquisar arquivo no sistema");
+        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lupa.png"))); // NOI18N
+        jButton8.setToolTipText("PEsquisar arquivo no sistema");
+        jButton8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lupa.png"))); // NOI18N
+        jButton9.setToolTipText("PEsquisar arquivo no sistema");
+        jButton9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lupa.png"))); // NOI18N
+        jButton10.setToolTipText("PEsquisar arquivo no sistema");
+        jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
+        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lupa.png"))); // NOI18N
+        jButton11.setToolTipText("PEsquisar arquivo no sistema");
+        jButton11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel11.setText("Nome:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtS1))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtE1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtS2))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtE2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel10)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtS3))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel9)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtE3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtEnunciado, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtS1))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtE1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(38, 38, 38)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel7)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtS2))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(jLabel6)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtE2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel10)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtS3))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(jLabel9)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtE3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)))
+                        .addGap(64, 64, 64))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNome))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(4, 4, 4)
+                                .addComponent(txtEnunciado, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1)
+                                .addComponent(txtEnunciado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
@@ -219,36 +349,41 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(txtS3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtEnunciado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))
-                        .addGap(26, 26, 26)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(txtE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel3)
+                                        .addComponent(txtE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
                                     .addComponent(txtS1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(txtE2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel6)
+                                        .addComponent(txtE2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(txtS2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel7)
+                                        .addComponent(txtS2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(32, 32, 32)
+                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -260,34 +395,75 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
     private void TabelaQuestoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaQuestoesMouseClicked
                                                
         if (TabelaQuestoes.getSelectedRow() != -1) {
-            txtEnunciado.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 0).toString());
-            txtE1.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 1).toString());
-            txtE2.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 2).toString());
-            txtE3.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 3).toString());
-            txtS1.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 4).toString());
-            txtS2.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 5).toString());
-            txtS3.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 6).toString());
+            txtNome.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 0).toString());
+            txtEnunciado.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 1).toString());
+            txtE1.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 2).toString());
+            txtE2.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 3).toString());
+            txtE3.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 4).toString());
+            txtS1.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 5).toString());
+            txtS2.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 6).toString());
+            txtS3.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 7).toString());
             
 
         }
     
     }//GEN-LAST:event_TabelaQuestoesMouseClicked
-
+    
+    public static void copy(File origem, File destino) throws IOException {
+        Date date = new Date();
+        InputStream in = new FileInputStream(origem);
+        OutputStream out = new FileOutputStream(destino);           
+        // Transferindo bytes de entrada para saída
+        byte[] buffer = new byte[1024];
+        int lenght;
+        while ((lenght= in.read(buffer)) > 0) {
+            out.write(buffer, 0, lenght);
+        }
+        in.close();
+        out.close();
+        Long time = new Date().getTime() - date.getTime();
+        System.out.println("Saiu copy"+time);
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        Questoes q = new Questoes();
        QuestoesDAO dao = new QuestoesDAO();
        
-        
-            q.setEnunciado(txtEnunciado.getText());
-            q.setEntrada1(txtE1.getText());
-            q.setEntrada2(txtE2.getText());
-            q.setEntrada3(txtE3.getText());
-            q.setSaida1(txtS1.getText());
-            q.setSaida2(txtS2.getText());
-            q.setSaida3(txtS3.getText());
+       new File("./quest/" + txtNome.getText()).mkdir(); //cria uma pasta com o nome da questão
+      
+       //Copia os arquivos para essa pasta
+       File enunc = new File(txtEnunciado.getText());
+       File e1 = new File(txtE1.getText());
+       File e2 = new File(txtE2.getText());
+       File e3 = new File(txtE3.getText());
+       File s1 = new File(txtS1.getText());
+       File s2 = new File(txtS2.getText());
+       File s3 = new File(txtS3.getText());
+       
+        try {
+            copy(enunc,new File("./quest/" + txtNome.getText()+"/"+this.enunciado));
+            copy(e1,new File("./quest/" + txtNome.getText()+"/"+this.entrada1));
+            copy(e2,new File("./quest/" + txtNome.getText()+"/"+this.entrada2));
+            copy(e3,new File("./quest/" + txtNome.getText()+"/"+this.entrada3));
+            copy(s1,new File("./quest/" + txtNome.getText()+"/"+this.saida1));
+            copy(s2,new File("./quest/" + txtNome.getText()+"/"+this.saida2));
+            copy(s3,new File("./quest/" + txtNome.getText()+"/"+this.saida3));
+        } catch (IOException ex) {
+            Logger.getLogger(GerenciarQuestoes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+            q.setNome(txtNome.getText());
+            q.setEnunciado("./quest/" + txtNome.getText()+"/"+this.enunciado);
+            q.setEntrada1("./quest/" + txtNome.getText()+"/"+this.entrada1);
+            q.setEntrada2("./quest/" + txtNome.getText()+"/"+this.entrada2);
+            q.setEntrada3("./quest/" + txtNome.getText()+"/"+this.entrada3);
+            q.setSaida1("./quest/" + txtNome.getText()+"/"+this.saida1);
+            q.setSaida2("./quest/" + txtNome.getText()+"/"+this.saida2);
+            q.setSaida3("./quest/" + txtNome.getText()+"/"+this.saida3);
 
             dao.create(q);
 
+            txtNome.setText("");
             txtEnunciado.setText("");
             txtE1.setText("");
             txtE2.setText("");
@@ -305,10 +481,21 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
         if (TabelaQuestoes.getSelectedRow() != -1) {
             Questoes q = new Questoes();
             QuestoesDAO dao = new QuestoesDAO();
-
-            q.setEnunciado(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 0).toString());
+            
+            new File(txtEnunciado.getText()).delete();
+            new File(txtE1.getText()).delete();
+            new File(txtE2.getText()).delete();
+            new File(txtE3.getText()).delete();
+            new File(txtS1.getText()).delete();
+            new File(txtS2.getText()).delete();
+            new File(txtS3.getText()).delete();
+                
+            new File("./quest/" + txtNome.getText()).delete();
+            
+            q.setNome(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 0).toString());
             dao.delete(q);
 
+            txtNome.setText("");
             txtEnunciado.setText("");
             txtE1.setText("");
             txtE2.setText("");
@@ -322,32 +509,55 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (TabelaQuestoes.getSelectedRow() != -1) {
-            Questoes q = new Questoes();
-            QuestoesDAO dao = new QuestoesDAO();
-            
-            q.setEnunciado(txtEnunciado.getText());
-            q.setEntrada1(txtE1.getText());
-            q.setEntrada2(txtE2.getText());
-            q.setEntrada3(txtE3.getText());
-            q.setSaida1(txtS1.getText());
-            q.setSaida2(txtS2.getText());
-            q.setSaida3(txtS3.getText());;    
-            dao.update(q);
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        JFileChooser arquivo = new JFileChooser();
+        arquivo.showOpenDialog(null);
+        txtEnunciado.setText(arquivo.getSelectedFile().getAbsolutePath());
+        this.enunciado = arquivo.getSelectedFile().getName();
+    }//GEN-LAST:event_jButton11ActionPerformed
 
-            txtEnunciado.setText("");
-            txtE1.setText("");
-            txtE2.setText("");
-            txtE3.setText("");
-            txtS1.setText("");
-            txtS2.setText("");
-            txtS3.setText("");
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        JFileChooser arquivo = new JFileChooser();
+        arquivo.showOpenDialog(null);
+        txtE1.setText(arquivo.getSelectedFile().getAbsolutePath());
+        this.entrada1 = arquivo.getSelectedFile().getName();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
-            readJTable(); 
-            
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        JFileChooser arquivo = new JFileChooser();
+        arquivo.showOpenDialog(null);
+        txtS1.setText(arquivo.getSelectedFile().getAbsolutePath());
+        this.saida1 = arquivo.getSelectedFile().getName();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+                                        
+        JFileChooser arquivo = new JFileChooser();
+        arquivo.showOpenDialog(null);
+        txtE2.setText(arquivo.getSelectedFile().getAbsolutePath());
+        this.entrada2 = arquivo.getSelectedFile().getName();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        JFileChooser arquivo = new JFileChooser();
+        arquivo.showOpenDialog(null);
+        txtS2.setText(arquivo.getSelectedFile().getAbsolutePath());
+        this.saida2 = arquivo.getSelectedFile().getName();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        JFileChooser arquivo = new JFileChooser();
+        arquivo.showOpenDialog(null);
+        txtE3.setText(arquivo.getSelectedFile().getAbsolutePath());
+        this.entrada3 = arquivo.getSelectedFile().getName();
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        JFileChooser arquivo = new JFileChooser();
+        arquivo.showOpenDialog(null);
+        txtS3.setText(arquivo.getSelectedFile().getAbsolutePath());
+        this.saida3 = arquivo.getSelectedFile().getName();
+    }//GEN-LAST:event_jButton10ActionPerformed
     public void readJTable(){
         DefaultTableModel modelo = (DefaultTableModel) TabelaQuestoes.getModel();
         modelo.setNumRows(0);
@@ -355,7 +565,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
         
         for(Questoes q: qdao.read()){
             modelo.addRow(new Object[]{
-                q.getEnunciado(),q.getEntrada1(),q.getEntrada2(),q.getEntrada3(),q.getSaida1(),q.getSaida2(),q.getSaida3()
+                q.getNome(),q.getEnunciado(),q.getEntrada1(),q.getEntrada2(),q.getEntrada3(),q.getSaida1(),q.getSaida2(),q.getSaida3()
             });
         }
         
@@ -400,10 +610,17 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TabelaQuestoes;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -417,6 +634,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
     private javax.swing.JTextField txtE2;
     private javax.swing.JTextField txtE3;
     private javax.swing.JTextField txtEnunciado;
+    private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtS1;
     private javax.swing.JTextField txtS2;
     private javax.swing.JTextField txtS3;

@@ -2,6 +2,7 @@
 package model.bean;
 
 public class Questoes {
+    private String nome;
     private String enunciado;
     private String entrada1;
     private String entrada2;
@@ -9,6 +10,14 @@ public class Questoes {
     private String saida1;
     private String saida2;
     private String saida3;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public String getEnunciado() {
         return enunciado;

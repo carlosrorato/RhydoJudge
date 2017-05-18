@@ -52,7 +52,7 @@ public class VerQuestoes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Enunciado"
+                "Nome"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -75,7 +75,7 @@ public class VerQuestoes extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,14 +88,16 @@ public class VerQuestoes extends javax.swing.JFrame {
 
     private void TabelaQuestoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaQuestoesMouseClicked
         //abrir o pdf da questão
-
-        String quest;
-        quest = TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(),0).toString();
-
+        QuestoesDAO qdao = new QuestoesDAO();
+        String nome;
+        Questoes q;
+        nome = TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(),0).toString();
+        q = qdao.obterQuestao(nome);
+        
         try {
-            java.awt.Desktop.getDesktop().open( new File("./quest/"+quest) );
+            java.awt.Desktop.getDesktop().open( new File(q.getEnunciado()));
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null,"Erro na abertura do arquivo do manual");
+            JOptionPane.showMessageDialog(null,"Erro na abertura do arquivo da questão");
         }
     }//GEN-LAST:event_TabelaQuestoesMouseClicked
     public void readJTable(){
@@ -105,7 +107,7 @@ public class VerQuestoes extends javax.swing.JFrame {
         
         for(Questoes q: qdao.read()){
             modelo.addRow(new Object[]{
-                q.getEnunciado()
+                q.getNome()
             });
         }
         

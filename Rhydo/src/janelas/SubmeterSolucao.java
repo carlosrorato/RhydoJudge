@@ -5,9 +5,16 @@
  */
 package janelas;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import model.bean.Questoes;
 import model.dao.QuestoesDAO;
@@ -19,13 +26,13 @@ import model.dao.UsuarioDAO;
  */
 public class SubmeterSolucao extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SubmeterSolucao
-     */
+    private String nome;
+    
     public SubmeterSolucao() {
         initComponents();
         balao.setVisible(false);
         resultado.setText("");
+        readCombo();
     }
 
     /**
@@ -38,7 +45,6 @@ public class SubmeterSolucao extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        txtEnunciado = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtSolucao = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -49,15 +55,15 @@ public class SubmeterSolucao extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        txtLogin = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        txtSenha = new javax.swing.JPasswordField();
+        jButton11 = new javax.swing.JButton();
+        comboNomeQuest = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Submeter Solução");
 
-        jLabel4.setText("Enunciado:");
-
-        txtEnunciado.setToolTipText("Informe  o enunciado da questão");
+        jLabel4.setText("Questão:");
 
         jLabel5.setText("Solução:");
 
@@ -66,46 +72,24 @@ public class SubmeterSolucao extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
         jLabel6.setText("Sistema RhydoJudgeBeta 1.0");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBackground(new java.awt.Color(215, 209, 218));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setToolTipText("Resultado da submissão");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel7.setText("Resultado:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 13, -1, -1));
 
         resultado.setFont(new java.awt.Font("URW Palladio L", 1, 15)); // NOI18N
         resultado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         resultado.setText("RESULTADO");
         resultado.setToolTipText("Resultado da submissão");
+        jPanel1.add(resultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 248, 40));
 
         balao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
         balao.setToolTipText("Resultado da submissão");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(resultado, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(balao)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(balao, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(resultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
+        jPanel1.add(balao, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, 59));
 
         jButton3.setText("Submeter");
         jButton3.setToolTipText("Submeter questão para o Judge");
@@ -123,74 +107,92 @@ public class SubmeterSolucao extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Login:");
-
-        txtLogin.setToolTipText("Informe seu nome de usuário");
+        jLabel10.setText("Senha:");
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo.png"))); // NOI18N
+
+        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lupa.png"))); // NOI18N
+        jButton11.setToolTipText("PEsquisar arquivo no sistema");
+        jButton11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        comboNomeQuest.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        comboNomeQuest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboNomeQuestActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel10)
-                                    .addGap(25, 25, 25)
-                                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtEnunciado, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(36, 36, 36)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtSolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(93, 93, 93))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(108, 108, 108))))
+                    .addComponent(jLabel6)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel8))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addGap(18, 18, 18)
+                            .addComponent(comboNomeQuest, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtEnunciado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtSolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addGap(26, 26, 26)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboNomeQuest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtSolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(jButton4)))
+                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
 
@@ -201,8 +203,30 @@ public class SubmeterSolucao extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
-
+    public static void copy(File origem, File destino) throws IOException {
+        Date date = new Date();
+        InputStream in = new FileInputStream(origem);
+        OutputStream out = new FileOutputStream(destino);           
+        // Transferindo bytes de entrada para saída
+        byte[] buffer = new byte[1024];
+        int lenght;
+        while ((lenght= in.read(buffer)) > 0) {
+            out.write(buffer, 0, lenght);
+        }
+        in.close();
+        out.close();
+        Long time = new Date().getTime() - date.getTime();
+        System.out.println("Saiu copy"+time);
+    }
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        //cópia do arquivo para a pasta judge
+        File sol = new File(txtSolucao.getText());
+        
+        try{
+        copy(sol,new File("./Judge/"+this.nome));
+        }catch(IOException ex){}
         
         UsuarioDAO dao = new UsuarioDAO();
         QuestoesDAO qdao = new QuestoesDAO();
@@ -212,19 +236,19 @@ public class SubmeterSolucao extends javax.swing.JFrame {
         int exValC,exValR1,exValR2,exValR3,flag=0;
         
         //incrementar a submissão no banco de dados
-        dao.adicionaSubmissao(txtLogin.getText());
+        dao.adicionaSubmissao(txtSenha.getText());
         try {
             //tentar compilar
-            comp = run.exec("./Judge/compilador ./Judge/"+txtSolucao.getText());
+            comp = run.exec("./Judge/compilador ./Judge/"+this.nome);
             exValC = comp.waitFor();
             
             if(exValC==1){
                 resultado.setText("NO - COMPILATION ERROR");
                 balao.setVisible(false);
             }else{ //vai rodar todos os testes de entrada e saída
-                q = qdao.obterQuestao(txtEnunciado.getText());
+                q = qdao.obterQuestao(comboNomeQuest.getItemAt(comboNomeQuest.getSelectedIndex()));
                 //executar teste de caso 1
-                comp = run.exec("./Judge/runner ./quest/"+q.getEntrada1()+" ./quest/"+q.getSaida1());
+                comp = run.exec("./Judge/runner "+q.getEntrada1()+" "+q.getSaida1());
                 exValR1 = comp.waitFor();
                 if(exValR1==2){
                     resultado.setText("NO - WRONG ANSWER");
@@ -232,7 +256,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                 }else{
                     if(exValR1==0) flag++;
                     //caso de teste 2
-                    comp = run.exec("./Judge/runner ./quest/"+q.getEntrada2()+" ./quest/"+q.getSaida2());
+                    comp = run.exec("./Judge/runner "+q.getEntrada2()+" "+q.getSaida2());
                     exValR2 = comp.waitFor();
                     if(exValR2==2){
                         resultado.setText("NO - WRONG ANSWER");
@@ -240,7 +264,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                     }else{
                         if(exValR2==0) flag++;
                         //caso de teste 3
-                        comp = run.exec("./Judge/runner ./quest/"+q.getEntrada3()+" ./quest/"+q.getSaida3());
+                        comp = run.exec("./Judge/runner "+q.getEntrada3()+" "+q.getSaida3());
                         exValR3 = comp.waitFor();
                         if(exValR3==2){
                             resultado.setText("NO - WRONG ANSWER");
@@ -250,7 +274,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                             balao.setVisible(true);
                             if(flag==3) resultado.setText("YES");
                             else resultado.setText("YES - PRESENTATION ERROR");
-                            dao.adicionaScore(txtLogin.getText());
+                            dao.adicionaScore(txtSenha.getText());
                         }
                     }
                 }
@@ -262,6 +286,23 @@ public class SubmeterSolucao extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        JFileChooser arquivo = new JFileChooser();
+        arquivo.showOpenDialog(null);
+        txtSolucao.setText(arquivo.getSelectedFile().getAbsolutePath());
+        this.nome = arquivo.getSelectedFile().getName();
+    }//GEN-LAST:event_jButton11ActionPerformed
+    private void readCombo(){
+        QuestoesDAO qdao = new QuestoesDAO();
+        
+        for(Questoes q: qdao.read()){
+            comboNomeQuest.addItem(q.getNome());
+        }
+    }
+    private void comboNomeQuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNomeQuestActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboNomeQuestActionPerformed
 
     /**
      * @param args the command line arguments
@@ -300,6 +341,8 @@ public class SubmeterSolucao extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel balao;
+    private javax.swing.JComboBox<String> comboNomeQuest;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel10;
@@ -310,8 +353,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel resultado;
-    private javax.swing.JTextField txtEnunciado;
-    private javax.swing.JTextField txtLogin;
+    private javax.swing.JPasswordField txtSenha;
     private javax.swing.JTextField txtSolucao;
     // End of variables declaration//GEN-END:variables
 }

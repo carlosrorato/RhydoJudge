@@ -23,7 +23,7 @@ public class QuestoesDAO {
             ResultSet rs = null;
             
             try {
-                stmt = con.prepareStatement("SELECT * FROM questoes WHERE enunciado = ?");
+                stmt = con.prepareStatement("SELECT * FROM questoes WHERE nome = ?");
                 stmt.setString(1,e);
                 rs = stmt.executeQuery();
                 
@@ -31,7 +31,7 @@ public class QuestoesDAO {
                 
                
                 
-            
+                q.setNome(rs.getString("nome"));    
                 q.setEnunciado(rs.getString("enunciado"));
                 q.setEntrada1(rs.getString("entrada1"));
                 q.setEntrada2(rs.getString("entrada2"));
@@ -58,14 +58,15 @@ public class QuestoesDAO {
         
         
         try {
-            stmt = con.prepareStatement("INSERT INTO questoes (enunciado,entrada1,entrada2,entrada3,saida1,saida2,saida3) VALUES(?,?,?,?,?,?,?)");
-            stmt.setString(1,q.getEnunciado());
-            stmt.setString(2,q.getEntrada1());
-            stmt.setString(3,q.getEntrada2());
-            stmt.setString(4,q.getEntrada3());
-            stmt.setString(5,q.getSaida1());
-            stmt.setString(6,q.getSaida2());
-            stmt.setString(7,q.getSaida3());
+            stmt = con.prepareStatement("INSERT INTO questoes (nome,enunciado,entrada1,entrada2,entrada3,saida1,saida2,saida3) VALUES(?,?,?,?,?,?,?,?)");
+            stmt.setString(1,q.getNome());
+            stmt.setString(2,q.getEnunciado());
+            stmt.setString(3,q.getEntrada1());
+            stmt.setString(4,q.getEntrada2());
+            stmt.setString(5,q.getEntrada3());
+            stmt.setString(6,q.getSaida1());
+            stmt.setString(7,q.getSaida2());
+            stmt.setString(8,q.getSaida3());
            
             
             
@@ -99,7 +100,7 @@ public class QuestoesDAO {
                 
                 Questoes q = new Questoes();
                 
-                
+                q.setNome(rs.getString("nome"));
                 q.setEnunciado(rs.getString("enunciado"));
                 q.setEntrada1(rs.getString("entrada1"));
                 q.setEntrada2(rs.getString("entrada2"));
@@ -131,7 +132,7 @@ public class QuestoesDAO {
         
         
         try {
-            stmt = con.prepareStatement("UPDATE questoes SET entrada1 = ?,entrada2 = ?,entrada3 = ?, saida1 = ?, saida2 = ?, saida3 = ? WHERE enunciado = ?");
+            stmt = con.prepareStatement("UPDATE questoes SET entrada1 = ?,entrada2 = ?,entrada3 = ?, saida1 = ?, saida2 = ?, saida3 = ?, enunciado = ? WHERE nome = ?");
             stmt.setString(1,q.getEntrada1());
             stmt.setString(2,q.getEntrada2());
             stmt.setString(3,q.getEntrada3());
@@ -139,7 +140,7 @@ public class QuestoesDAO {
             stmt.setString(5,q.getSaida2());
             stmt.setString(6,q.getSaida3());
             stmt.setString(7,q.getEnunciado());
-            
+            stmt.setString(8,q.getNome());
             
             
             
@@ -163,8 +164,8 @@ public class QuestoesDAO {
         
         
         try {
-            stmt = con.prepareStatement("DELETE FROM questoes WHERE enunciado = ?");
-            stmt.setString(1,q.getEnunciado());
+            stmt = con.prepareStatement("DELETE FROM questoes WHERE nome = ?");
+            stmt.setString(1,q.getNome());
             
             
             stmt.executeUpdate();
