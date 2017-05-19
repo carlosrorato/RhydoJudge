@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.dao.SubmissaoDAO;
 import model.dao.TempoDAO;
+import model.dao.UsuarioDAO;
 
 /**
  *
@@ -28,6 +29,7 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
         initComponents();
         contadorTempo();
         txtNome.setText(System.getProperty("login",""));
+        imprimirScoreLoop();
     }
 
     /**
@@ -45,7 +47,23 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtNome = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        b2 = new javax.swing.JLabel();
+        b12 = new javax.swing.JLabel();
+        b3 = new javax.swing.JLabel();
+        b13 = new javax.swing.JLabel();
+        b4 = new javax.swing.JLabel();
+        b14 = new javax.swing.JLabel();
+        b5 = new javax.swing.JLabel();
+        b15 = new javax.swing.JLabel();
+        b6 = new javax.swing.JLabel();
+        b7 = new javax.swing.JLabel();
+        b8 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        b9 = new javax.swing.JLabel();
+        scoreRestante = new javax.swing.JLabel();
+        b10 = new javax.swing.JLabel();
+        b1 = new javax.swing.JLabel();
+        b11 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -80,7 +98,41 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
 
         jLabel4.setText("!");
 
-        jLabel5.setText("Score:");
+        b2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        b12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        b3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        b13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        b4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        b14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        b5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        b15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        b6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        b7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        b8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel6.setText("Score:");
+
+        b9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        scoreRestante.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        scoreRestante.setText("+20");
+
+        b10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        b1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        b11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
 
         jMenu3.setText("Usuários");
         jMenu3.setToolTipText("");
@@ -199,9 +251,6 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNome)
@@ -214,7 +263,42 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
                             .addComponent(mostrador_tempo, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 414, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addGap(22, 22, 22))))
+                        .addGap(22, 22, 22))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(b1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(scoreRestante, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,9 +308,28 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtNome)
                     .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 375, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(b1)
+                    .addComponent(b2)
+                    .addComponent(b3)
+                    .addComponent(b5)
+                    .addComponent(b6)
+                    .addComponent(b7)
+                    .addComponent(b8)
+                    .addComponent(b9)
+                    .addComponent(b10)
+                    .addComponent(b11)
+                    .addComponent(b12)
+                    .addComponent(b13)
+                    .addComponent(b14)
+                    .addComponent(b15)
+                    .addComponent(b4)
+                    .addComponent(scoreRestante, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 338, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -334,6 +437,214 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
         segundo = (tempo % 3600)%60;
         mostrador_tempo.setText(hora + "h  " + minuto + "min  "+segundo+"seg");
     }
+    
+    private void imprimirScore(){
+       UsuarioDAO udao = new UsuarioDAO();
+       int s;
+       s = udao.getScore(System.getProperty("login"));
+       
+       //pré-carregamento
+       
+       scoreRestante.setVisible(false);
+       b1.setVisible(false);
+       b2.setVisible(false);
+       b3.setVisible(false);
+       b4.setVisible(false);
+       b5.setVisible(false);
+       b6.setVisible(false);
+       b7.setVisible(false);
+       b8.setVisible(false);
+       b9.setVisible(false);
+       b10.setVisible(false);
+       b11.setVisible(false);
+       b12.setVisible(false);
+       b13.setVisible(false);
+       b14.setVisible(false);
+       b15.setVisible(false);
+       
+       //caso a caso
+       if(s==1){
+          b1.setVisible(true);    
+       }
+       if(s==2){
+          b1.setVisible(true); 
+          b2.setVisible(true);    
+       }
+       if(s==3){
+          b1.setVisible(true); 
+          b2.setVisible(true);
+          b3.setVisible(true);  
+       }
+       if(s==4){
+          b1.setVisible(true); 
+          b2.setVisible(true);
+          b3.setVisible(true); 
+          b4.setVisible(true);  
+       }
+       if(s==5){
+          b1.setVisible(true); 
+          b2.setVisible(true);
+          b3.setVisible(true); 
+          b4.setVisible(true);
+          b5.setVisible(true); 
+       }
+       if(s==6){
+          b1.setVisible(true); 
+          b2.setVisible(true);
+          b3.setVisible(true); 
+          b4.setVisible(true);
+          b5.setVisible(true); 
+          b6.setVisible(true); 
+       }
+       if(s==7){
+          b1.setVisible(true); 
+          b2.setVisible(true);
+          b3.setVisible(true); 
+          b4.setVisible(true);
+          b5.setVisible(true); 
+          b6.setVisible(true); 
+          b7.setVisible(true);
+       }
+       if(s==8){
+          b1.setVisible(true); 
+          b2.setVisible(true);
+          b3.setVisible(true); 
+          b4.setVisible(true);
+          b5.setVisible(true); 
+          b6.setVisible(true); 
+          b7.setVisible(true);
+          b8.setVisible(true);
+       }
+       if(s==9){
+          b1.setVisible(true); 
+          b2.setVisible(true);
+          b3.setVisible(true); 
+          b4.setVisible(true);
+          b5.setVisible(true); 
+          b6.setVisible(true); 
+          b7.setVisible(true);
+          b8.setVisible(true);
+          b9.setVisible(true);
+       }
+       if(s==10){
+          b1.setVisible(true); 
+          b2.setVisible(true);
+          b3.setVisible(true); 
+          b4.setVisible(true);
+          b5.setVisible(true); 
+          b6.setVisible(true); 
+          b7.setVisible(true);
+          b8.setVisible(true);
+          b9.setVisible(true);
+          b10.setVisible(true);
+       }
+       if(s==11){
+          b1.setVisible(true); 
+          b2.setVisible(true);
+          b3.setVisible(true); 
+          b4.setVisible(true);
+          b5.setVisible(true); 
+          b6.setVisible(true); 
+          b7.setVisible(true);
+          b8.setVisible(true);
+          b9.setVisible(true);
+          b10.setVisible(true);
+          b11.setVisible(true);
+       }
+       if(s==12){
+          b1.setVisible(true); 
+          b2.setVisible(true);
+          b3.setVisible(true); 
+          b4.setVisible(true);
+          b5.setVisible(true); 
+          b6.setVisible(true); 
+          b7.setVisible(true);
+          b8.setVisible(true);
+          b9.setVisible(true);
+          b10.setVisible(true);
+          b11.setVisible(true);
+          b12.setVisible(true);
+       }
+       if(s==13){
+          b1.setVisible(true); 
+          b2.setVisible(true);
+          b3.setVisible(true); 
+          b4.setVisible(true);
+          b5.setVisible(true); 
+          b6.setVisible(true); 
+          b7.setVisible(true);
+          b8.setVisible(true);
+          b9.setVisible(true);
+          b10.setVisible(true);
+          b11.setVisible(true);
+          b12.setVisible(true);
+          b13.setVisible(true);
+       }
+       if(s==14){
+          b1.setVisible(true); 
+          b2.setVisible(true);
+          b3.setVisible(true); 
+          b4.setVisible(true);
+          b5.setVisible(true); 
+          b6.setVisible(true); 
+          b7.setVisible(true);
+          b8.setVisible(true);
+          b9.setVisible(true);
+          b10.setVisible(true);
+          b11.setVisible(true);
+          b12.setVisible(true);
+          b13.setVisible(true);
+          b14.setVisible(true);
+       }
+       if(s==15){
+          b1.setVisible(true); 
+          b2.setVisible(true);
+          b3.setVisible(true); 
+          b4.setVisible(true);
+          b5.setVisible(true); 
+          b6.setVisible(true); 
+          b7.setVisible(true);
+          b8.setVisible(true);
+          b9.setVisible(true);
+          b10.setVisible(true);
+          b11.setVisible(true);
+          b12.setVisible(true);
+          b13.setVisible(true);
+          b15.setVisible(true);
+       }
+       if(s>15){
+          b1.setVisible(true); 
+          b2.setVisible(true);
+          b3.setVisible(true); 
+          b4.setVisible(true);
+          b5.setVisible(true); 
+          b6.setVisible(true); 
+          b7.setVisible(true);
+          b8.setVisible(true);
+          b9.setVisible(true);
+          b10.setVisible(true);
+          b11.setVisible(true);
+          b12.setVisible(true);
+          b13.setVisible(true);
+          b15.setVisible(true);
+          scoreRestante.setVisible(true);
+          scoreRestante.setText("+"+(s-15));
+       }
+    }
+    
+    private void imprimirScoreLoop(){
+        int delay = 0;   // delay de 0 seg.
+        int interval = 10000;  // intervalo de 10 seg.
+        Timer timer = new Timer();
+
+                
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                imprimirScore();
+
+            }
+        }, delay, interval);
+    }
     /**
      * @param args the command line arguments
      */
@@ -370,11 +681,26 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel b1;
+    private javax.swing.JLabel b10;
+    private javax.swing.JLabel b11;
+    private javax.swing.JLabel b12;
+    private javax.swing.JLabel b13;
+    private javax.swing.JLabel b14;
+    private javax.swing.JLabel b15;
+    private javax.swing.JLabel b2;
+    private javax.swing.JLabel b3;
+    private javax.swing.JLabel b4;
+    private javax.swing.JLabel b5;
+    private javax.swing.JLabel b6;
+    private javax.swing.JLabel b7;
+    private javax.swing.JLabel b8;
+    private javax.swing.JLabel b9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -391,6 +717,7 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JLabel mostrador_tempo;
+    private javax.swing.JLabel scoreRestante;
     private javax.swing.JLabel txtNome;
     // End of variables declaration//GEN-END:variables
 }

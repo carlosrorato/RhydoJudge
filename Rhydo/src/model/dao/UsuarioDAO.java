@@ -22,6 +22,36 @@ import model.bean.Usuario;
  */
 public class UsuarioDAO {
     
+    
+    public int getScore(String login){
+        
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int score = 0;
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE login = ?");
+            stmt.setString(1, login);
+            rs = stmt.executeQuery();
+            
+            
+            if(rs.next()){
+                
+                score = rs.getInt("score");
+                
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao consultar score: "+ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return score;
+        
+    }
+    
     public void adicionaScore(String senha){
         
         Connection con = ConnectionFactory.getConnection();
