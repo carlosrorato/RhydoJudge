@@ -143,6 +143,8 @@ public class TelaLogin extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         UsuarioDAO dao = new UsuarioDAO();
         
+        System.setProperty("login", txtLogin.getText());
+        
         if(opAdmin.isSelected()==true && opUser.isSelected()==true) JOptionPane.showMessageDialog(null,"Escolha entre Usuário e Administrador!");
         else if(opAdmin.isSelected()==true){
             //logar como administrador

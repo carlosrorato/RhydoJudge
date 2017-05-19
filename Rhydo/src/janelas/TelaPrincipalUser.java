@@ -25,6 +25,7 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
         initComponents();
         submSolEnable();
         contadorTempo();
+        txtNome.setText(System.getProperty("login",""));
     }
 
     /**
@@ -39,6 +40,10 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         mostrador_tempo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtNome = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -59,6 +64,15 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
         mostrador_tempo.setText("--h --min");
 
         jLabel1.setText("Tempo restante:");
+
+        jLabel2.setText("Bem vindo(a), ");
+
+        txtNome.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        txtNome.setText("jLabel3");
+
+        jLabel3.setText("!");
+
+        jLabel5.setText("Score:");
 
         jMenu2.setText("Questões");
 
@@ -129,18 +143,38 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mostrador_tempo)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 580, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(mostrador_tempo, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNome)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(485, Short.MAX_VALUE)
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNome)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 377, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -205,7 +239,7 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
     private void contadorTempo() {
 
         int delay = 000;   // delay de 0 seg.
-        int interval = 60000;  // intervalo de 60 seg.
+        int interval = 1000;  // intervalo de 1 seg.
         Timer timer = new Timer();
         ImprimirTempo();
         
@@ -213,11 +247,12 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
             public void run() {
                 SubmissaoDAO sdao = new SubmissaoDAO();
                 TempoDAO tdao = new TempoDAO();
-                int hora = 0, minuto = 0, tempo = 0;
+                int hora = 0, minuto = 0, tempo = 0, segundo=0;
                 tempo = tdao.getTempoSub();
-                hora = tempo / 60;
-                minuto = tempo % 60;
-                mostrador_tempo.setText(hora + "h " + minuto + "min");
+                hora = tempo / 3600;
+                minuto = (tempo % 3600)/60;
+                segundo = (tempo % 3600)%60;
+                mostrador_tempo.setText(hora + "h  " + minuto + "min  "+segundo+"seg");
                 if (tempo == 0) {
                     sdao.setHabilitado(false);
                     return;
@@ -234,12 +269,15 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
     
     public void ImprimirTempo(){
         TempoDAO tdao = new TempoDAO();
-        int hora = 0, minuto = 0, tempo = 0;
+        int hora = 0, minuto = 0, tempo = 0, segundo =0;
         tempo = tdao.getTempoSub();
-        hora = tempo / 60;
-        minuto = tempo % 60;
-        mostrador_tempo.setText(hora + "h " + minuto + "min");
+        hora = tempo / 3600;
+        minuto = (tempo % 3600)/60;
+        segundo = (tempo % 3600)%60;
+        mostrador_tempo.setText(hora + "h  " + minuto + "min  "+segundo+"seg");
     }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -278,7 +316,10 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
@@ -289,6 +330,7 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JLabel mostrador_tempo;
+    private javax.swing.JLabel txtNome;
     // End of variables declaration//GEN-END:variables
 
 }
