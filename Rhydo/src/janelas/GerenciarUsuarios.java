@@ -45,14 +45,14 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
         opAdmin = new javax.swing.JRadioButton();
         opUser = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
-        txtScore = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtTotal = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaUsuario = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        spinnerScore = new javax.swing.JSpinner();
+        spinnerTotalSub = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerenciar Usuários");
@@ -85,16 +85,7 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
 
         jLabel5.setText("Score:");
 
-        txtScore.setToolTipText("Total de questões corretas");
-        txtScore.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtScoreActionPerformed(evt);
-            }
-        });
-
         jLabel6.setText("Total de Submissões:");
-
-        txtTotal.setToolTipText("Total de envios");
 
         TabelaUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,6 +135,10 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
             }
         });
 
+        spinnerScore.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        spinnerTotalSub.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,29 +152,30 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtScore, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6)
-                                        .addGap(4, 4, 4)
-                                        .addComponent(txtTotal))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(opAdmin)
                                         .addGap(18, 18, 18)
                                         .addComponent(opUser))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(4, 4, 4)
-                                        .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addGap(3, 3, 3)
+                                            .addComponent(spinnerScore, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel6)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(spinnerTotalSub))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabel1)
+                                            .addGap(4, 4, 4)
+                                            .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jButton1)
@@ -207,9 +203,9 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinnerScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spinnerTotalSub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -247,15 +243,15 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
             else u.setTipo(2);
             u.setLogin(txtLogin.getText());
             u.setSenha(txtSenha.getText());
-            u.setScore(Integer.parseInt(txtScore.getText()));
-            u.setTotalSub(Integer.parseInt(txtTotal.getText()));
+            u.setScore((Integer) spinnerScore.getValue());
+            u.setTotalSub((Integer) spinnerTotalSub.getValue());
 
             dao.create(u);
 
             txtLogin.setText("");
             txtSenha.setText("");
-            txtScore.setText("");
-            txtTotal.setText("");
+            spinnerScore.setValue(0);
+            spinnerTotalSub.setValue(0);
             opAdmin.setSelected(false);
             opUser.setSelected(false);
             
@@ -267,10 +263,6 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
         opUser.setSelected(false);
     }//GEN-LAST:event_opAdminActionPerformed
 
-    private void txtScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtScoreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtScoreActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (TabelaUsuario.getSelectedRow() != -1) {
             Usuario u = new Usuario();
@@ -281,8 +273,8 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
 
             txtLogin.setText("");
             txtSenha.setText("");
-            txtScore.setText("");
-            txtTotal.setText("");
+            spinnerScore.setValue(0);
+            spinnerTotalSub.setValue(0);
             opAdmin.setSelected(false);
             opUser.setSelected(false);
 
@@ -294,8 +286,8 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
         if (TabelaUsuario.getSelectedRow() != -1) {
             txtLogin.setText(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 0).toString());
             txtSenha.setText(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 1).toString());
-            txtScore.setText(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 3).toString());
-            txtTotal.setText(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 4).toString());
+            spinnerScore.setValue(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 3));
+            spinnerTotalSub.setValue(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 4));
             if (TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 2).equals(1)) {
                 opAdmin.setSelected(true);
                 opUser.setSelected(false);
@@ -313,8 +305,8 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
             UsuarioDAO dao = new UsuarioDAO();
             
             u.setSenha(txtSenha.getText());
-            u.setScore(Integer.parseInt(txtScore.getText()));
-            u.setTotalSub(Integer.parseInt(txtTotal.getText()));
+            u.setScore((Integer) spinnerScore.getValue());
+            u.setTotalSub((Integer) spinnerTotalSub.getValue());
             if(opAdmin.isSelected() == true) u.setTipo(1);
             else u.setTipo(2);
             u.setLogin(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(),0).toString());    
@@ -322,8 +314,8 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
 
             txtLogin.setText("");
             txtSenha.setText("");
-            txtScore.setText("");
-            txtTotal.setText("");
+            spinnerScore.setValue(0);
+            spinnerTotalSub.setValue(0);
             opAdmin.setSelected(false);
             opUser.setSelected(false);
 
@@ -384,9 +376,9 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton opAdmin;
     private javax.swing.JRadioButton opUser;
+    private javax.swing.JSpinner spinnerScore;
+    private javax.swing.JSpinner spinnerTotalSub;
     private javax.swing.JTextField txtLogin;
-    private javax.swing.JTextField txtScore;
     private javax.swing.JTextField txtSenha;
-    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

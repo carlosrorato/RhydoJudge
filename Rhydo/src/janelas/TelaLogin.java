@@ -144,6 +144,7 @@ public class TelaLogin extends javax.swing.JFrame {
         UsuarioDAO dao = new UsuarioDAO();
         
         System.setProperty("login", txtLogin.getText());
+        System.setProperty("senha", txtSenha.getText());
         
         if(opAdmin.isSelected()==true && opUser.isSelected()==true) JOptionPane.showMessageDialog(null,"Escolha entre Usuário e Administrador!");
         else if(opAdmin.isSelected()==true){
