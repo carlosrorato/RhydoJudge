@@ -22,6 +22,34 @@ import model.bean.Usuario;
  */
 public class UsuarioDAO {
     
+    public int getSubm(String login){
+        
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int subm = 0;
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE login = ?");
+            stmt.setString(1, login);
+            rs = stmt.executeQuery();
+            
+            
+            if(rs.next()){
+                
+                subm = rs.getInt("totalSub");
+                
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Erro ao consultar submissoes: "+ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return subm;
+        
+    }
     
     public int getScore(String login){
         

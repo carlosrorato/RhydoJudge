@@ -30,6 +30,7 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
         contadorTempo();
         txtNome.setText(System.getProperty("login",""));
         imprimirScoreLoop();
+        imprimirTotalSubLoop();
     }
 
     /**
@@ -64,6 +65,8 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
         b10 = new javax.swing.JLabel();
         b1 = new javax.swing.JLabel();
         b11 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        totalSub = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -133,6 +136,11 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
         b1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
 
         b11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+
+        jLabel7.setText("Total de Submissões:");
+
+        totalSub.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        totalSub.setText("00");
 
         jMenu3.setText("Usuários");
         jMenu3.setToolTipText("");
@@ -299,16 +307,22 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(scoreRestante, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(totalSub)
+                .addGap(740, 740, 740))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtNome)
                     .addComponent(jLabel4))
-                .addGap(27, 27, 27)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(b1)
                     .addComponent(b2)
@@ -329,7 +343,11 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 338, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(totalSub))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -610,6 +628,7 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
           b11.setVisible(true);
           b12.setVisible(true);
           b13.setVisible(true);
+          b14.setVisible(true);
           b15.setVisible(true);
        }
        if(s>15){
@@ -626,6 +645,7 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
           b11.setVisible(true);
           b12.setVisible(true);
           b13.setVisible(true);
+          b14.setVisible(true);
           b15.setVisible(true);
           scoreRestante.setVisible(true);
           scoreRestante.setText("+"+(s-15));
@@ -642,6 +662,22 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
             public void run() {
                 imprimirScore();
 
+            }
+        }, delay, interval);
+    }
+    
+    private void imprimirTotalSubLoop(){
+        int delay = 0;   // delay de 0 seg.
+        int interval = 10000;  // intervalo de 10 seg.
+        Timer timer = new Timer();
+
+                
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                UsuarioDAO udao = new UsuarioDAO();
+                int s;
+                s = udao.getSubm(System.getProperty("login"));
+                totalSub.setText(String.valueOf(s));        
             }
         }, delay, interval);
     }
@@ -701,6 +737,7 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -718,6 +755,7 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JLabel mostrador_tempo;
     private javax.swing.JLabel scoreRestante;
+    private javax.swing.JLabel totalSub;
     private javax.swing.JLabel txtNome;
     // End of variables declaration//GEN-END:variables
 }
