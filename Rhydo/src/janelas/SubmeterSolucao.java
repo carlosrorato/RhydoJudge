@@ -5,6 +5,7 @@
  */
 package janelas;
 
+import compilador.MainCompiler;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -227,22 +228,23 @@ public class SubmeterSolucao extends javax.swing.JFrame {
         File sol = new File(txtSolucao.getText());
         
         try{
-        copy(sol,new File("./Judge/"+this.nome));
-        }catch(IOException ex){}
+            copy(sol,new File("./Judge/"+this.nome));
+        }catch(IOException ex){
+            JOptionPane.showMessageDialog(rootPane, "Problema ao copiar arquivo: "+ex);
+        }
         
+        MainCompiler compilador = new MainCompiler();
         UsuarioDAO dao = new UsuarioDAO();
         QuestoesDAO qdao = new QuestoesDAO();
-        Runtime run = Runtime.getRuntime();
         Questoes q = new Questoes();
-        Process comp;
         int exValC,exValR1,exValR2,exValR3,flag=0;
         
         //incrementar a submissão no banco de dados
         dao.adicionaSubmissao(System.getProperty("senha"));
         try {
             //tentar compilar
-            comp = run.exec("./Judge/compilador ./Judge/"+this.nome);
-            exValC = comp.waitFor();
+
+            exValC = compilador.Compilador("./Judge/"+this.nome);
             
             if(exValC==1){
                 resultado.setText("NO - COMPILATION ERROR");
@@ -250,24 +252,24 @@ public class SubmeterSolucao extends javax.swing.JFrame {
             }else{ //vai rodar todos os testes de entrada e saída
                 q = qdao.obterQuestao(comboNomeQuest.getItemAt(comboNomeQuest.getSelectedIndex()));
                 //executar teste de caso 1
-                comp = run.exec("./Judge/runner "+q.getEntrada1()+" "+q.getSaida1());
-                exValR1 = comp.waitFor();
+
+                exValR1 = compilador.Runner(q.getEntrada1(), q.getSaida1());
                 if(exValR1==2){
                     resultado.setText("NO - WRONG ANSWER");
                     balao.setVisible(false);
                 }else{
                     if(exValR1==0) flag++;
                     //caso de teste 2
-                    comp = run.exec("./Judge/runner "+q.getEntrada2()+" "+q.getSaida2());
-                    exValR2 = comp.waitFor();
+                    
+                    exValR2 = compilador.Runner(q.getEntrada2(), q.getSaida2());
                     if(exValR2==2){
                         resultado.setText("NO - WRONG ANSWER");
                         balao.setVisible(false);
                     }else{
                         if(exValR2==0) flag++;
                         //caso de teste 3
-                        comp = run.exec("./Judge/runner "+q.getEntrada3()+" "+q.getSaida3());
-                        exValR3 = comp.waitFor();
+                        
+                        exValR3 = compilador.Runner(q.getEntrada3(), q.getSaida3());
                         if(exValR3==2){
                             resultado.setText("NO - WRONG ANSWER");
                             balao.setVisible(false);
@@ -282,9 +284,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                 }
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null,"Erro no judge!");
-        } catch (InterruptedException ex) {
-            Logger.getLogger(SubmeterSolucao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Erro no judge: "+ex);
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed
