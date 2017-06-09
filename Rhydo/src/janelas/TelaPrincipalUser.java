@@ -21,13 +21,11 @@ import model.dao.UsuarioDAO;
  */
 public class TelaPrincipalUser extends javax.swing.JFrame {
 
-
-    
     public TelaPrincipalUser() {
         initComponents();
         submSolEnable();
         contadorTempo();
-        txtNome.setText(System.getProperty("login",""));
+        txtNome.setText(System.getProperty("login", ""));
         imprimirScoreLoop();
         imprimirTotalSubLoop();
     }
@@ -311,10 +309,10 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
-    
+
+
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        JOptionPane.showMessageDialog(null,"Rhydo 1.0\n\nLinguagens Suportadas:\n- Linguagem C\n\nDesenvolvido por Carlos Henrique Rorato Souza\n e Acquila Santos Rocha\n\nUFG - Instituto de Informática\n2017");
+        JOptionPane.showMessageDialog(null, "Rhydo 1.0\n\nLinguagens Suportadas:\n- Linguagem C\n\nDesenvolvido por Carlos Henrique Rorato Souza\n e Acquila Santos Rocha\n\nUFG - Instituto de Informática\n2017");
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
@@ -322,10 +320,10 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-       try {
-            java.awt.Desktop.getDesktop().open( new File( "./Manual/user.pdf" ) );
+        try {
+            java.awt.Desktop.getDesktop().open(new File("./Manual/user.pdf"));
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null,"Erro na abertura do arquivo do manual");
+            JOptionPane.showMessageDialog(null, "Erro na abertura do arquivo do manual");
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
@@ -334,7 +332,7 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        JOptionPane.showMessageDialog(null,"Sessão Encerrada!");
+        JOptionPane.showMessageDialog(null, "Sessão Encerrada!");
         new TelaLogin().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -342,266 +340,255 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         new SubmeterSolucao().setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
-    
-    private void submSolEnable(){
+
+    private void submSolEnable() {
         SubmissaoDAO subDao = new SubmissaoDAO();
         int delay = 1000;   // delay de 1 seg.
         int interval = 1000;  // intervalo de 1 seg.
         Timer timer = new Timer();
-        
+
         jMenuItem7.setEnabled(true);
         subDao.setHabilitado(true);
-                
+
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 jMenuItem7.setEnabled(subDao.getHabilitado());
             }
         }, delay, interval);
-        
-        
+
     }
-    
+
     private void contadorTempo() {
 
         int delay = 000;   // delay de 0 seg.
         int interval = 1000;  // intervalo de 1 seg.
         Timer timer = new Timer();
         ImprimirTempo();
-        
+
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                SubmissaoDAO sdao = new SubmissaoDAO();
-                TempoDAO tdao = new TempoDAO();
-                int hora = 0, minuto = 0, tempo = 0, segundo=0;
-                tempo = tdao.getTempoSub();
-                hora = tempo / 3600;
-                minuto = (tempo % 3600)/60;
-                segundo = (tempo % 3600)%60;
-                mostrador_tempo.setText(hora + "h  " + minuto + "min  "+segundo+"seg");
-                if (tempo == 0) {
-                    sdao.setHabilitado(false);
-                    return;
-                }
-                tempo = tempo - 1;
-                tdao.setTempoSub(tempo);
-
+                ImprimirTempo();
             }
         }, delay, interval);
 
     }
-    
-    public void ImprimirTempo(){
+
+    public void ImprimirTempo() {
         TempoDAO tdao = new TempoDAO();
-        int hora = 0, minuto = 0, tempo = 0, segundo =0;
+        SubmissaoDAO sdao = new SubmissaoDAO();
+        int hora = 0, minuto = 0, tempo = 0, segundo = 0;
         tempo = tdao.getTempoSub();
         hora = tempo / 3600;
-        minuto = (tempo % 3600)/60;
-        segundo = (tempo % 3600)%60;
-        mostrador_tempo.setText(hora + "h  " + minuto + "min  "+segundo+"seg");
+        minuto = (tempo % 3600) / 60;
+        segundo = (tempo % 3600) % 60;
+        mostrador_tempo.setText(hora + "h  " + minuto + "min  " + segundo + "seg");
+        if (tempo == 0) {
+            sdao.setHabilitado(false);
+            return;
+        }
+
     }
-    
-    private void imprimirScore(){
-       UsuarioDAO udao = new UsuarioDAO();
-       int s;
-       s = udao.getScore(System.getProperty("login"));
-       
-       //pré-carregamento
-       
-       scoreRestante.setVisible(false);
-       b1.setVisible(false);
-       b2.setVisible(false);
-       b3.setVisible(false);
-       b4.setVisible(false);
-       b5.setVisible(false);
-       b6.setVisible(false);
-       b7.setVisible(false);
-       b8.setVisible(false);
-       b9.setVisible(false);
-       b10.setVisible(false);
-       b11.setVisible(false);
-       b12.setVisible(false);
-       b13.setVisible(false);
-       b14.setVisible(false);
-       b15.setVisible(false);
-       
-       //caso a caso
-       if(s==1){
-          b1.setVisible(true);    
-       }
-       if(s==2){
-          b1.setVisible(true); 
-          b2.setVisible(true);    
-       }
-       if(s==3){
-          b1.setVisible(true); 
-          b2.setVisible(true);
-          b3.setVisible(true);  
-       }
-       if(s==4){
-          b1.setVisible(true); 
-          b2.setVisible(true);
-          b3.setVisible(true); 
-          b4.setVisible(true);  
-       }
-       if(s==5){
-          b1.setVisible(true); 
-          b2.setVisible(true);
-          b3.setVisible(true); 
-          b4.setVisible(true);
-          b5.setVisible(true); 
-       }
-       if(s==6){
-          b1.setVisible(true); 
-          b2.setVisible(true);
-          b3.setVisible(true); 
-          b4.setVisible(true);
-          b5.setVisible(true); 
-          b6.setVisible(true); 
-       }
-       if(s==7){
-          b1.setVisible(true); 
-          b2.setVisible(true);
-          b3.setVisible(true); 
-          b4.setVisible(true);
-          b5.setVisible(true); 
-          b6.setVisible(true); 
-          b7.setVisible(true);
-       }
-       if(s==8){
-          b1.setVisible(true); 
-          b2.setVisible(true);
-          b3.setVisible(true); 
-          b4.setVisible(true);
-          b5.setVisible(true); 
-          b6.setVisible(true); 
-          b7.setVisible(true);
-          b8.setVisible(true);
-       }
-       if(s==9){
-          b1.setVisible(true); 
-          b2.setVisible(true);
-          b3.setVisible(true); 
-          b4.setVisible(true);
-          b5.setVisible(true); 
-          b6.setVisible(true); 
-          b7.setVisible(true);
-          b8.setVisible(true);
-          b9.setVisible(true);
-       }
-       if(s==10){
-          b1.setVisible(true); 
-          b2.setVisible(true);
-          b3.setVisible(true); 
-          b4.setVisible(true);
-          b5.setVisible(true); 
-          b6.setVisible(true); 
-          b7.setVisible(true);
-          b8.setVisible(true);
-          b9.setVisible(true);
-          b10.setVisible(true);
-       }
-       if(s==11){
-          b1.setVisible(true); 
-          b2.setVisible(true);
-          b3.setVisible(true); 
-          b4.setVisible(true);
-          b5.setVisible(true); 
-          b6.setVisible(true); 
-          b7.setVisible(true);
-          b8.setVisible(true);
-          b9.setVisible(true);
-          b10.setVisible(true);
-          b11.setVisible(true);
-       }
-       if(s==12){
-          b1.setVisible(true); 
-          b2.setVisible(true);
-          b3.setVisible(true); 
-          b4.setVisible(true);
-          b5.setVisible(true); 
-          b6.setVisible(true); 
-          b7.setVisible(true);
-          b8.setVisible(true);
-          b9.setVisible(true);
-          b10.setVisible(true);
-          b11.setVisible(true);
-          b12.setVisible(true);
-       }
-       if(s==13){
-          b1.setVisible(true); 
-          b2.setVisible(true);
-          b3.setVisible(true); 
-          b4.setVisible(true);
-          b5.setVisible(true); 
-          b6.setVisible(true); 
-          b7.setVisible(true);
-          b8.setVisible(true);
-          b9.setVisible(true);
-          b10.setVisible(true);
-          b11.setVisible(true);
-          b12.setVisible(true);
-          b13.setVisible(true);
-       }
-       if(s==14){
-          b1.setVisible(true); 
-          b2.setVisible(true);
-          b3.setVisible(true); 
-          b4.setVisible(true);
-          b5.setVisible(true); 
-          b6.setVisible(true); 
-          b7.setVisible(true);
-          b8.setVisible(true);
-          b9.setVisible(true);
-          b10.setVisible(true);
-          b11.setVisible(true);
-          b12.setVisible(true);
-          b13.setVisible(true);
-          b14.setVisible(true);
-       }
-       if(s==15){
-          b1.setVisible(true); 
-          b2.setVisible(true);
-          b3.setVisible(true); 
-          b4.setVisible(true);
-          b5.setVisible(true); 
-          b6.setVisible(true); 
-          b7.setVisible(true);
-          b8.setVisible(true);
-          b9.setVisible(true);
-          b10.setVisible(true);
-          b11.setVisible(true);
-          b12.setVisible(true);
-          b13.setVisible(true);
-          b14.setVisible(true);
-          b15.setVisible(true);
-       }
-       if(s>15){
-          b1.setVisible(true); 
-          b2.setVisible(true);
-          b3.setVisible(true); 
-          b4.setVisible(true);
-          b5.setVisible(true); 
-          b6.setVisible(true); 
-          b7.setVisible(true);
-          b8.setVisible(true);
-          b9.setVisible(true);
-          b10.setVisible(true);
-          b11.setVisible(true);
-          b12.setVisible(true);
-          b13.setVisible(true);
-          b14.setVisible(true);
-          b15.setVisible(true);
-          scoreRestante.setVisible(true);
-          scoreRestante.setText("+"+(s-15));
-       }
+
+    private void imprimirScore() {
+        UsuarioDAO udao = new UsuarioDAO();
+        int s;
+        s = udao.getScore(System.getProperty("login"));
+
+        //pré-carregamento
+        scoreRestante.setVisible(false);
+        b1.setVisible(false);
+        b2.setVisible(false);
+        b3.setVisible(false);
+        b4.setVisible(false);
+        b5.setVisible(false);
+        b6.setVisible(false);
+        b7.setVisible(false);
+        b8.setVisible(false);
+        b9.setVisible(false);
+        b10.setVisible(false);
+        b11.setVisible(false);
+        b12.setVisible(false);
+        b13.setVisible(false);
+        b14.setVisible(false);
+        b15.setVisible(false);
+
+        //caso a caso
+        if (s == 1) {
+            b1.setVisible(true);
+        }
+        if (s == 2) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+        }
+        if (s == 3) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+        }
+        if (s == 4) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+            b4.setVisible(true);
+        }
+        if (s == 5) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+            b4.setVisible(true);
+            b5.setVisible(true);
+        }
+        if (s == 6) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+            b4.setVisible(true);
+            b5.setVisible(true);
+            b6.setVisible(true);
+        }
+        if (s == 7) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+            b4.setVisible(true);
+            b5.setVisible(true);
+            b6.setVisible(true);
+            b7.setVisible(true);
+        }
+        if (s == 8) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+            b4.setVisible(true);
+            b5.setVisible(true);
+            b6.setVisible(true);
+            b7.setVisible(true);
+            b8.setVisible(true);
+        }
+        if (s == 9) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+            b4.setVisible(true);
+            b5.setVisible(true);
+            b6.setVisible(true);
+            b7.setVisible(true);
+            b8.setVisible(true);
+            b9.setVisible(true);
+        }
+        if (s == 10) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+            b4.setVisible(true);
+            b5.setVisible(true);
+            b6.setVisible(true);
+            b7.setVisible(true);
+            b8.setVisible(true);
+            b9.setVisible(true);
+            b10.setVisible(true);
+        }
+        if (s == 11) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+            b4.setVisible(true);
+            b5.setVisible(true);
+            b6.setVisible(true);
+            b7.setVisible(true);
+            b8.setVisible(true);
+            b9.setVisible(true);
+            b10.setVisible(true);
+            b11.setVisible(true);
+        }
+        if (s == 12) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+            b4.setVisible(true);
+            b5.setVisible(true);
+            b6.setVisible(true);
+            b7.setVisible(true);
+            b8.setVisible(true);
+            b9.setVisible(true);
+            b10.setVisible(true);
+            b11.setVisible(true);
+            b12.setVisible(true);
+        }
+        if (s == 13) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+            b4.setVisible(true);
+            b5.setVisible(true);
+            b6.setVisible(true);
+            b7.setVisible(true);
+            b8.setVisible(true);
+            b9.setVisible(true);
+            b10.setVisible(true);
+            b11.setVisible(true);
+            b12.setVisible(true);
+            b13.setVisible(true);
+        }
+        if (s == 14) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+            b4.setVisible(true);
+            b5.setVisible(true);
+            b6.setVisible(true);
+            b7.setVisible(true);
+            b8.setVisible(true);
+            b9.setVisible(true);
+            b10.setVisible(true);
+            b11.setVisible(true);
+            b12.setVisible(true);
+            b13.setVisible(true);
+            b14.setVisible(true);
+        }
+        if (s == 15) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+            b4.setVisible(true);
+            b5.setVisible(true);
+            b6.setVisible(true);
+            b7.setVisible(true);
+            b8.setVisible(true);
+            b9.setVisible(true);
+            b10.setVisible(true);
+            b11.setVisible(true);
+            b12.setVisible(true);
+            b13.setVisible(true);
+            b14.setVisible(true);
+            b15.setVisible(true);
+        }
+        if (s > 15) {
+            b1.setVisible(true);
+            b2.setVisible(true);
+            b3.setVisible(true);
+            b4.setVisible(true);
+            b5.setVisible(true);
+            b6.setVisible(true);
+            b7.setVisible(true);
+            b8.setVisible(true);
+            b9.setVisible(true);
+            b10.setVisible(true);
+            b11.setVisible(true);
+            b12.setVisible(true);
+            b13.setVisible(true);
+            b14.setVisible(true);
+            b15.setVisible(true);
+            scoreRestante.setVisible(true);
+            scoreRestante.setText("+" + (s - 15));
+        }
     }
-    
-    private void imprimirScoreLoop(){
+
+    private void imprimirScoreLoop() {
         int delay = 0;   // delay de 0 seg.
         int interval = 10000;  // intervalo de 10 seg.
         Timer timer = new Timer();
 
-                
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 imprimirScore();
@@ -609,23 +596,22 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
             }
         }, delay, interval);
     }
-    
-    private void imprimirTotalSubLoop(){
+
+    private void imprimirTotalSubLoop() {
         int delay = 0;   // delay de 0 seg.
         int interval = 10000;  // intervalo de 10 seg.
         Timer timer = new Timer();
 
-                
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 UsuarioDAO udao = new UsuarioDAO();
                 int s;
                 s = udao.getSubm(System.getProperty("login"));
-                totalSub.setText(String.valueOf(s));        
+                totalSub.setText(String.valueOf(s));
             }
         }, delay, interval);
     }
-    
+
     /**
      * @param args the command line arguments
      */

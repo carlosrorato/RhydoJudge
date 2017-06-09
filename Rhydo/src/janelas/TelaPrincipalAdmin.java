@@ -427,20 +427,7 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
                 
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-
-                TempoDAO tdao = new TempoDAO();
-                int hora = 0, minuto = 0, tempo = 0, segundo =0;
-                tempo = tdao.getTempoSub();
-                hora = tempo / 3600;
-                minuto = (tempo % 3600)/60;
-                segundo = (tempo % 3600)%60;
-                mostrador_tempo.setText(hora + "h  " + minuto + "min  "+segundo+"seg");
-                if (tempo == 0) {
-                    return;
-                }
-                tempo = tempo - 1;
-                tdao.setTempoSub(tempo);
-
+                ImprimirTempo();
             }
         }, delay, interval);
 
