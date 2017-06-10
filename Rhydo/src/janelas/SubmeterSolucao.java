@@ -240,7 +240,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
         int exValC,exValR1,exValR2,exValR3,flag=0;
         
         //incrementar a submissão no banco de dados
-        dao.adicionaSubmissao(System.getProperty("senha"));
+        dao.adicionaSubmissao(System.getProperty("login"));
         try {
             //tentar compilar
 
@@ -278,7 +278,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                             balao.setVisible(true);
                             if(flag==3) resultado.setText("YES");
                             else resultado.setText("YES - PRESENTATION ERROR");
-                            dao.adicionaScore(System.getProperty("senha"));
+                            dao.adicionaScore(System.getProperty("login"));
                         }
                     }
                 }

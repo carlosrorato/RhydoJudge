@@ -40,7 +40,7 @@ public class TelaLogin extends javax.swing.JFrame {
         opAdmin = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Rhydo 1.0 - Login");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImages(null);
@@ -144,7 +144,7 @@ public class TelaLogin extends javax.swing.JFrame {
         UsuarioDAO dao = new UsuarioDAO();
         
         System.setProperty("login", txtLogin.getText());
-        System.setProperty("senha", txtSenha.getText());
+ 
         
         if(opAdmin.isSelected()==true && opUser.isSelected()==true) JOptionPane.showMessageDialog(null,"Escolha entre Usuário e Administrador!");
         else if(opAdmin.isSelected()==true){

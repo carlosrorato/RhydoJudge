@@ -1,7 +1,7 @@
 
 package model.bean;
 
-public class Questoes {
+public class Questoes extends Cadastro{
     private String nome;
     private String enunciado;
     private String entrada1;

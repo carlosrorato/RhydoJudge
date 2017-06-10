@@ -1,7 +1,7 @@
 
 package model.bean;
 
-public class Usuario {
+public class Usuario extends Cadastro{
     private String login;
     private String senha;
     private int tipo;

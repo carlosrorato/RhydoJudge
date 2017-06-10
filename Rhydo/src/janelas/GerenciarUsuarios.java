@@ -92,11 +92,11 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Login", "Senha", "Tipo", "Score", "Total Subm."
+                "Id", "Login", "Senha", "Tipo", "Score", "Total Subm."
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -226,7 +226,7 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
         
         for(Usuario u: udao.read()){
             modelo.addRow(new Object[]{
-                u.getLogin(),u.getSenha(),u.getTipo(),u.getScore(),u.getTotalSub()
+                u.getId(),u.getLogin(),u.getSenha(),u.getTipo(),u.getScore(),u.getTotalSub()
             });
         }
         
@@ -268,7 +268,7 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
             Usuario u = new Usuario();
             UsuarioDAO dao = new UsuarioDAO();
 
-            u.setLogin(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 0).toString());
+            u.setId(Integer.parseInt(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(),0).toString()));
             dao.delete(u);
 
             txtLogin.setText("");
@@ -284,11 +284,11 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
 
     private void TabelaUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaUsuarioMouseClicked
         if (TabelaUsuario.getSelectedRow() != -1) {
-            txtLogin.setText(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 0).toString());
-            txtSenha.setText(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 1).toString());
-            spinnerScore.setValue(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 3));
-            spinnerTotalSub.setValue(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 4));
-            if (TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 2).equals(1)) {
+            txtLogin.setText(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 1).toString());
+            txtSenha.setText(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 2).toString());
+            spinnerScore.setValue(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 4));
+            spinnerTotalSub.setValue(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 5));
+            if (TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 3).equals(1)) {
                 opAdmin.setSelected(true);
                 opUser.setSelected(false);
             } else {
@@ -304,12 +304,14 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
             Usuario u = new Usuario();
             UsuarioDAO dao = new UsuarioDAO();
             
+            u.setId(Integer.parseInt(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(),0).toString()));
+            u.setLogin(txtLogin.getText());
             u.setSenha(txtSenha.getText());
             u.setScore((Integer) spinnerScore.getValue());
             u.setTotalSub((Integer) spinnerTotalSub.getValue());
             if(opAdmin.isSelected() == true) u.setTipo(1);
-            else u.setTipo(2);
-            u.setLogin(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(),0).toString());    
+            else u.setTipo(2); 
+            
             dao.update(u);
 
             txtLogin.setText("");

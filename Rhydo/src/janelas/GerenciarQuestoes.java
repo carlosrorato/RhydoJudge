@@ -147,11 +147,11 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Enunciado", "Entrada 1", "Saída 1", "Entrada 2", "Saída 2", "Entrada 3", "Saída 3"
+                "Id", "Nome", "Enunciado", "Entrada 1", "Saída 1", "Entrada 2", "Saída 2", "Entrada 3", "Saída 3"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -395,14 +395,14 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
     private void TabelaQuestoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaQuestoesMouseClicked
                                                
         if (TabelaQuestoes.getSelectedRow() != -1) {
-            txtNome.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 0).toString());
-            txtEnunciado.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 1).toString());
-            txtE1.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 2).toString());
-            txtE2.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 3).toString());
-            txtE3.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 4).toString());
-            txtS1.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 5).toString());
-            txtS2.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 6).toString());
-            txtS3.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 7).toString());
+            txtNome.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 1).toString());
+            txtEnunciado.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 2).toString());
+            txtE1.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 3).toString());
+            txtE2.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 4).toString());
+            txtE3.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 5).toString());
+            txtS1.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 6).toString());
+            txtS2.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 7).toString());
+            txtS3.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 8).toString());
             
 
         }
@@ -492,7 +492,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
                 
             new File("./quest/" + txtNome.getText()).delete();
             
-            q.setNome(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 0).toString());
+            q.setId(Integer.parseInt(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 0).toString()));
             dao.delete(q);
 
             txtNome.setText("");
@@ -565,7 +565,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
         
         for(Questoes q: qdao.read()){
             modelo.addRow(new Object[]{
-                q.getNome(),q.getEnunciado(),q.getEntrada1(),q.getEntrada2(),q.getEntrada3(),q.getSaida1(),q.getSaida2(),q.getSaida3()
+                q.getId(),q.getNome(),q.getEnunciado(),q.getEntrada1(),q.getEntrada2(),q.getEntrada3(),q.getSaida1(),q.getSaida2(),q.getSaida3()
             });
         }
         

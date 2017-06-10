@@ -14,7 +14,7 @@ import model.bean.Questoes;
 
 public class QuestoesDAO {
         
-        public Questoes obterQuestao(String e){
+        public Questoes obterQuestao(String nome){
             Questoes q = new Questoes();
             
             
@@ -24,7 +24,7 @@ public class QuestoesDAO {
             
             try {
                 stmt = con.prepareStatement("SELECT * FROM questoes WHERE nome = ?");
-                stmt.setString(1,e);
+                stmt.setString(1,nome);
                 rs = stmt.executeQuery();
                 
                 if(rs.next()){
@@ -99,7 +99,7 @@ public class QuestoesDAO {
             while(rs.next()){
                 
                 Questoes q = new Questoes();
-                
+                q.setId(rs.getInt("id"));
                 q.setNome(rs.getString("nome"));
                 q.setEnunciado(rs.getString("enunciado"));
                 q.setEntrada1(rs.getString("entrada1"));
@@ -123,38 +123,7 @@ public class QuestoesDAO {
         return questoes;
         
     }
-    
-    
-    public void update(Questoes q){
-        
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        
-        
-        try {
-            stmt = con.prepareStatement("UPDATE questoes SET entrada1 = ?,entrada2 = ?,entrada3 = ?, saida1 = ?, saida2 = ?, saida3 = ?, enunciado = ? WHERE nome = ?");
-            stmt.setString(1,q.getEntrada1());
-            stmt.setString(2,q.getEntrada2());
-            stmt.setString(3,q.getEntrada3());
-            stmt.setString(4,q.getSaida1());
-            stmt.setString(5,q.getSaida2());
-            stmt.setString(6,q.getSaida3());
-            stmt.setString(7,q.getEnunciado());
-            stmt.setString(8,q.getNome());
-            
-            
-            
-            stmt.executeUpdate();
-            
-            
-            JOptionPane.showMessageDialog(null,"Atualizado com sucesso!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Erro ao atualizar: "+ex);
-        }finally{
-            ConnectionFactory.closeConnection(con, stmt);
-        }
-        
-    }
+  
     
     
     public void delete(Questoes q){
@@ -164,8 +133,8 @@ public class QuestoesDAO {
         
         
         try {
-            stmt = con.prepareStatement("DELETE FROM questoes WHERE nome = ?");
-            stmt.setString(1,q.getNome());
+            stmt = con.prepareStatement("DELETE FROM questoes WHERE id = ?");
+            stmt.setInt(1, q.getId());
             
             
             stmt.executeUpdate();

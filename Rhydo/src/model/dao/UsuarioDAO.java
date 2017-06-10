@@ -80,15 +80,15 @@ public class UsuarioDAO {
         
     }
     
-    public void adicionaScore(String senha){
+    public void adicionaScore(String login){
         
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         
         
         try {
-            stmt = con.prepareStatement("UPDATE usuario SET score = score+1 WHERE senha = ?");
-            stmt.setString(1,senha);
+            stmt = con.prepareStatement("UPDATE usuario SET score = score+1 WHERE login = ?");
+            stmt.setString(1,login);
             
             
             
@@ -106,15 +106,15 @@ public class UsuarioDAO {
     }
     
     
-    public void adicionaSubmissao(String senha){
+    public void adicionaSubmissao(String login){
         
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         
         
         try {
-            stmt = con.prepareStatement("UPDATE usuario SET totalSub = totalSub+1 WHERE senha = ?");
-            stmt.setString(1,senha);
+            stmt = con.prepareStatement("UPDATE usuario SET totalSub = totalSub+1 WHERE login = ?");
+            stmt.setString(1,login);
             
             
             
@@ -205,7 +205,7 @@ public class UsuarioDAO {
             while(rs.next()){
                 
                 Usuario u = new Usuario();
-                
+                u.setId(rs.getInt("id"));
                 u.setTipo(rs.getInt("tipo"));
                 u.setLogin(rs.getString("login"));
                 u.setSenha(rs.getString("senha"));
@@ -217,7 +217,7 @@ public class UsuarioDAO {
             }
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Erro ao adicionar usuario na lista: "+ex);
+            JOptionPane.showMessageDialog(null,"Erro ao adicionar usuário na lista: "+ex);
         }finally{
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
@@ -234,13 +234,13 @@ public class UsuarioDAO {
         
         
         try {
-            stmt = con.prepareStatement("UPDATE usuario SET senha = ?,tipo = ?,score = ?,totalSub = ? WHERE login = ?");
+            stmt = con.prepareStatement("UPDATE usuario SET senha = ?,tipo = ?,score = ?,totalSub = ?,login = ? WHERE id = ?");
             stmt.setString(1,u.getSenha());
             stmt.setInt(2,u.getTipo());
             stmt.setInt(3,u.getScore());
             stmt.setInt(4,u.getTotalSub());
             stmt.setString(5,u.getLogin());
-            
+            stmt.setInt(6,u.getId());
             
             
             stmt.executeUpdate();
@@ -263,8 +263,8 @@ public class UsuarioDAO {
         
         
         try {
-            stmt = con.prepareStatement("DELETE FROM usuario WHERE login = ?");
-            stmt.setString(1,u.getLogin());
+            stmt = con.prepareStatement("DELETE FROM usuario WHERE id = ?");
+            stmt.setInt(1,u.getId());
             
             
             stmt.executeUpdate();

@@ -30,8 +30,10 @@ CREATE TABLE `questoes` (
   `saida1` varchar(81) DEFAULT NULL,
   `saida2` varchar(81) DEFAULT NULL,
   `saida3` varchar(81) DEFAULT NULL,
-  `nome` varchar(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `nome` varchar(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,8 +72,10 @@ CREATE TABLE `usuario` (
   `senha` varchar(11) DEFAULT NULL,
   `tipo` int(11) DEFAULT NULL,
   `score` int(11) DEFAULT NULL,
-  `totalSub` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `totalSub` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -83,4 +87,4 @@ CREATE TABLE `usuario` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-09 13:12:06
+-- Dump completed on 2017-06-10 18:44:54
