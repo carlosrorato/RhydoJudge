@@ -18,10 +18,16 @@ import java.util.logging.Logger;
  */
 public class MainCompiler {
     
-    public int Compilador(String caminho) throws IOException
+    public int Compilador(String caminho, String linguagem) throws IOException
     {
         Runtime rt = Runtime.getRuntime();
-        String comando = String.format("gcc %s -o temp -lm", caminho);
+        
+        String comando;
+        
+        if(linguagem.equals("C")) comando = String.format("gcc %s -o temp -lm", caminho);
+        else if(linguagem.equals("C++")) comando = String.format("g++ %s -o temp", caminho);
+        else comando = "";
+        
         Process p = rt.exec(comando);
         int val=0;
         try {

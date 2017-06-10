@@ -312,7 +312,7 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
 
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        JOptionPane.showMessageDialog(null, "Rhydo 1.0\n\nLinguagens Suportadas:\n- Linguagem C\n\nDesenvolvido por Carlos Henrique Rorato Souza\n e Acquila Santos Rocha\n\nUFG - Instituto de Informática\n2017");
+        JOptionPane.showMessageDialog(null, "Rhydo 1.0\n\nLinguagens Suportadas: C, C++\n\n\nDesenvolvido por Carlos Henrique Rorato Souza\n e Acquila Santos Rocha\n\nUFG - Instituto de Informática\n2017");
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed

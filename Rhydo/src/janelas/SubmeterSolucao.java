@@ -59,7 +59,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         comboNomeQuest = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        opLinguagem = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Submeter Solução");
@@ -129,7 +129,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
 
         jLabel1.setText("Linguagem:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "        ", "C", "C++" }));
+        opLinguagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "        ", "C", "C++" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,7 +156,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(opLinguagem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel4)
                             .addGap(18, 18, 18)
@@ -178,7 +178,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(opLinguagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -244,7 +244,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
         try {
             //tentar compilar
 
-            exValC = compilador.Compilador("./Judge/"+this.nome);
+            exValC = compilador.Compilador("./Judge/"+this.nome,opLinguagem.getItemAt(opLinguagem.getSelectedIndex()));
             
             if(exValC==1){
                 resultado.setText("NO - COMPILATION ERROR");
@@ -347,7 +347,6 @@ public class SubmeterSolucao extends javax.swing.JFrame {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -355,6 +354,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JComboBox<String> opLinguagem;
     private javax.swing.JLabel resultado;
     private javax.swing.JTextField txtSolucao;
     // End of variables declaration//GEN-END:variables
