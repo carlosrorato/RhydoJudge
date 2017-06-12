@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import model.bean.Questoes;
@@ -27,15 +28,9 @@ import model.dao.QuestoesDAO;
  * @author carlosrorato
  */
 public class GerenciarQuestoes extends javax.swing.JFrame {
-    
-    private String enunciado;
-    private String entrada1;
-    private String entrada2;
-    private String entrada3;
-    private String saida1;
-    private String saida2;
-    private String saida3;
+
     JFileChooser arquivo = new JFileChooser();
+
     /**
      * Creates new form GerenciarQuestoes
      */
@@ -43,7 +38,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
         initComponents();
         DefaultTableModel modelo = (DefaultTableModel) TabelaQuestoes.getModel();
         TabelaQuestoes.setRowSorter(new TableRowSorter(modelo));
-        
+
         readJTable();
     }
 
@@ -403,7 +398,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TabelaQuestoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaQuestoesMouseClicked
-                                               
+
         if (TabelaQuestoes.getSelectedRow() != -1) {
             txtNome.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 1).toString());
             txtEnunciado.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 2).toString());
@@ -413,89 +408,87 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
             txtS1.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 6).toString());
             txtS2.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 7).toString());
             txtS3.setText(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 8).toString());
-            
 
         }
-    
+
     }//GEN-LAST:event_TabelaQuestoesMouseClicked
-    
+
     public static void copy(File origem, File destino) throws IOException {
         Date date = new Date();
         InputStream in = new FileInputStream(origem);
-        OutputStream out = new FileOutputStream(destino);           
+        OutputStream out = new FileOutputStream(destino);
         // Transferindo bytes de entrada para saída
         byte[] buffer = new byte[1024];
         int lenght;
-        while ((lenght= in.read(buffer)) > 0) {
+        while ((lenght = in.read(buffer)) > 0) {
             out.write(buffer, 0, lenght);
         }
         in.close();
         out.close();
         Long time = new Date().getTime() - date.getTime();
-        System.out.println("Saiu copy"+time);
+        System.out.println("Saiu copy" + time);
     }
-    
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       if(txtNome.getText().isEmpty()){
-           JOptionPane.showMessageDialog(this, "Informe um nome para a questão!");
-           return;
-       }
-       Questoes q = new Questoes();
-       QuestoesDAO dao = new QuestoesDAO();
-       
-       new File("./quest/" + txtNome.getText()).mkdir(); //cria uma pasta com o nome da questão
-      
-       //Copia os arquivos para essa pasta
-       File enunc = new File(txtEnunciado.getText());
-       File e1 = new File(txtE1.getText());
-       File e2 = new File(txtE2.getText());
-       File e3 = new File(txtE3.getText());
-       File s1 = new File(txtS1.getText());
-       File s2 = new File(txtS2.getText());
-       File s3 = new File(txtS3.getText());
-       
+        if (txtNome.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe um nome para a questão!");
+            return;
+        }
+        Questoes q = new Questoes();
+        QuestoesDAO dao = new QuestoesDAO();
+
+        new File("./quest/" + txtNome.getText()).mkdir(); //cria uma pasta com o nome da questão
+
+        //Copia os arquivos para essa pasta
+        File enunc = new File(txtEnunciado.getText());
+        File e1 = new File(txtE1.getText());
+        File e2 = new File(txtE2.getText());
+        File e3 = new File(txtE3.getText());
+        File s1 = new File(txtS1.getText());
+        File s2 = new File(txtS2.getText());
+        File s3 = new File(txtS3.getText());
+
         try {
-            copy(enunc,new File("./quest/" + txtNome.getText()+"/"+this.enunciado));
-            copy(e1,new File("./quest/" + txtNome.getText()+"/"+this.entrada1));
-            copy(e2,new File("./quest/" + txtNome.getText()+"/"+this.entrada2));
-            copy(e3,new File("./quest/" + txtNome.getText()+"/"+this.entrada3));
-            copy(s1,new File("./quest/" + txtNome.getText()+"/"+this.saida1));
-            copy(s2,new File("./quest/" + txtNome.getText()+"/"+this.saida2));
-            copy(s3,new File("./quest/" + txtNome.getText()+"/"+this.saida3));
+            copy(enunc, new File("./quest/" + txtNome.getText() + "/" + enunc.getName()));
+            copy(e1, new File("./quest/" + txtNome.getText() + "/" + e1.getName()));
+            copy(e2, new File("./quest/" + txtNome.getText() + "/" + e2.getName()));
+            copy(e3, new File("./quest/" + txtNome.getText() + "/" + e3.getName()));
+            copy(s1, new File("./quest/" + txtNome.getText() + "/" + s1.getName()));
+            copy(s2, new File("./quest/" + txtNome.getText() + "/" + s1.getName()));
+            copy(s3, new File("./quest/" + txtNome.getText() + "/" + s1.getName()));
         } catch (IOException ex) {
             Logger.getLogger(GerenciarQuestoes.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-            q.setNome(txtNome.getText());
-            q.setEnunciado("./quest/" + txtNome.getText()+"/"+this.enunciado);
-            q.setEntrada1("./quest/" + txtNome.getText()+"/"+this.entrada1);
-            q.setEntrada2("./quest/" + txtNome.getText()+"/"+this.entrada2);
-            q.setEntrada3("./quest/" + txtNome.getText()+"/"+this.entrada3);
-            q.setSaida1("./quest/" + txtNome.getText()+"/"+this.saida1);
-            q.setSaida2("./quest/" + txtNome.getText()+"/"+this.saida2);
-            q.setSaida3("./quest/" + txtNome.getText()+"/"+this.saida3);
 
-            dao.create(q);
+        q.setNome(txtNome.getText());
+        q.setEnunciado("./quest/" + txtNome.getText() + "/" + enunc.getName());
+        q.setEntrada1("./quest/" + txtNome.getText() + "/" + e1.getName());
+        q.setEntrada2("./quest/" + txtNome.getText() + "/" + e2.getName());
+        q.setEntrada3("./quest/" + txtNome.getText() + "/" + e3.getName());
+        q.setSaida1("./quest/" + txtNome.getText() + "/" + s1.getName());
+        q.setSaida2("./quest/" + txtNome.getText() + "/" + s2.getName());
+        q.setSaida3("./quest/" + txtNome.getText() + "/" + s3.getName());
 
-            txtNome.setText("");
-            txtEnunciado.setText("");
-            txtE1.setText("");
-            txtE2.setText("");
-            txtE3.setText("");
-            txtS1.setText("");
-            txtS2.setText("");
-            txtS3.setText("");
-            
-            
-            readJTable();
-        
+        dao.create(q);
+
+        txtNome.setText("");
+        txtEnunciado.setText("");
+        txtE1.setText("");
+        txtE2.setText("");
+        txtE3.setText("");
+        txtS1.setText("");
+        txtS2.setText("");
+        txtS3.setText("");
+
+        readJTable();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (TabelaQuestoes.getSelectedRow() != -1) {
             Questoes q = new Questoes();
             QuestoesDAO dao = new QuestoesDAO();
-            
+
             new File(txtEnunciado.getText()).delete();
             new File(txtE1.getText()).delete();
             new File(txtE2.getText()).delete();
@@ -503,9 +496,9 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
             new File(txtS1.getText()).delete();
             new File(txtS2.getText()).delete();
             new File(txtS3.getText()).delete();
-                
+
             new File("./quest/" + txtNome.getText()).delete();
-            
+
             q.setId(Integer.parseInt(TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(), 0).toString()));
             dao.delete(q);
 
@@ -517,99 +510,61 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
             txtS1.setText("");
             txtS2.setText("");
             txtS3.setText("");
-            
 
             readJTable();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-
-        if (arquivo.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            txtEnunciado.setText(arquivo.getSelectedFile().getAbsolutePath());
-            this.enunciado = arquivo.getSelectedFile().getName();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Selecione um arquivo!");
-        }
+        escolherArquivo(txtEnunciado,"pdf");
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-     
-        if (arquivo.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            txtE1.setText(arquivo.getSelectedFile().getAbsolutePath());
-            this.entrada1 = arquivo.getSelectedFile().getName();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Selecione um arquivo!");
-        }
+        escolherArquivo(txtE1,"txt");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
-        if (arquivo.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            txtS1.setText(arquivo.getSelectedFile().getAbsolutePath());
-            this.saida1 = arquivo.getSelectedFile().getName();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Selecione um arquivo!");
-        }
+        escolherArquivo(txtS1,"txt");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-                                        
-       
-        if (arquivo.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            txtE2.setText(arquivo.getSelectedFile().getAbsolutePath());
-            this.entrada2 = arquivo.getSelectedFile().getName();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Selecione um arquivo!");
-        }
+        escolherArquivo(txtE2,"txt");
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-    
-        if (arquivo.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            txtS2.setText(arquivo.getSelectedFile().getAbsolutePath());
-            this.saida2 = arquivo.getSelectedFile().getName();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Selecione um arquivo!");
-        }
+        escolherArquivo(txtS2,"txt");
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        
-        if (arquivo.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            txtE3.setText(arquivo.getSelectedFile().getAbsolutePath());
-            this.entrada3 = arquivo.getSelectedFile().getName();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Selecione um arquivo!");
-        }
+        escolherArquivo(txtE3,"txt");
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        
-        if (arquivo.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            txtS3.setText(arquivo.getSelectedFile().getAbsolutePath());
-            this.saida3 = arquivo.getSelectedFile().getName();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Selecione um arquivo!");
-        }
+        escolherArquivo(txtS3,"txt");
     }//GEN-LAST:event_jButton10ActionPerformed
-    
- 
-    
-    public void readJTable(){
+
+    public void escolherArquivo(JTextField caixaTexto, String extensao) {
+        arquivo.setFileFilter(new FileNameExtensionFilter(extensao,extensao));
+        if (arquivo.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            caixaTexto.setText(arquivo.getSelectedFile().getAbsolutePath());
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um arquivo!");
+        }
+    }
+
+    public void readJTable() {
         DefaultTableModel modelo = (DefaultTableModel) TabelaQuestoes.getModel();
         modelo.setNumRows(0);
         QuestoesDAO qdao = new QuestoesDAO();
-        
-        for(Questoes q: qdao.read()){
+
+        for (Questoes q : qdao.read()) {
             modelo.addRow(new Object[]{
-                q.getId(),q.getNome(),q.getEnunciado(),q.getEntrada1(),q.getEntrada2(),q.getEntrada3(),q.getSaida1(),q.getSaida2(),q.getSaida3()
+                q.getId(), q.getNome(), q.getEnunciado(), q.getEntrada1(), q.getEntrada2(), q.getEntrada3(), q.getSaida1(), q.getSaida2(), q.getSaida3()
             });
         }
-        
+
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
