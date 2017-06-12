@@ -242,6 +242,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtEnunciado">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="toolTipText" type="java.lang.String" value="Insira o arquivo (.pdf) do enunciado da quest&#xe3;o"/>
       </Properties>
     </Component>
@@ -260,6 +261,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtE1">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="toolTipText" type="java.lang.String" value="Insira o arquivo (.txt) da entrada do caso de teste 1"/>
       </Properties>
     </Component>
@@ -270,6 +272,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtS1">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="toolTipText" type="java.lang.String" value="Insira o arquivo (.txt) da sa&#xed;da do caso de teste 1"/>
       </Properties>
     </Component>
@@ -289,6 +292,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtE2">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="toolTipText" type="java.lang.String" value="Insira o arquivo (.txt) da entrada do caso de teste 2"/>
       </Properties>
     </Component>
@@ -299,6 +303,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtS2">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="toolTipText" type="java.lang.String" value="Insira o arquivo (.txt) da sa&#xed;da do caso de teste 2"/>
       </Properties>
     </Component>
@@ -317,6 +322,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtE3">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="toolTipText" type="java.lang.String" value="Insira o arquivo (.txt) da entrada do caso de teste 3"/>
       </Properties>
     </Component>
@@ -327,6 +333,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtS3">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="toolTipText" type="java.lang.String" value="Insira o arquivo (.txt) da sa&#xed;da do caso de teste 3"/>
       </Properties>
     </Component>

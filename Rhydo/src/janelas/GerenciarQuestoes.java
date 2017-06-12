@@ -15,6 +15,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import model.bean.Questoes;
@@ -33,6 +35,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
     private String saida1;
     private String saida2;
     private String saida3;
+    JFileChooser arquivo = new JFileChooser();
     /**
      * Creates new form GerenciarQuestoes
      */
@@ -90,6 +93,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel1.setText("Enunciado:");
 
+        txtEnunciado.setEditable(false);
         txtEnunciado.setToolTipText("Insira o arquivo (.pdf) do enunciado da questão");
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
@@ -97,10 +101,12 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
 
         jLabel3.setText("Entrada:");
 
+        txtE1.setEditable(false);
         txtE1.setToolTipText("Insira o arquivo (.txt) da entrada do caso de teste 1");
 
         jLabel4.setText("Saída:");
 
+        txtS1.setEditable(false);
         txtS1.setToolTipText("Insira o arquivo (.txt) da saída do caso de teste 1");
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
@@ -109,10 +115,12 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
 
         jLabel6.setText("Entrada:");
 
+        txtE2.setEditable(false);
         txtE2.setToolTipText("Insira o arquivo (.txt) da entrada do caso de teste 2");
 
         jLabel7.setText("Saída:");
 
+        txtS2.setEditable(false);
         txtS2.setToolTipText("Insira o arquivo (.txt) da saída do caso de teste 2");
 
         jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
@@ -120,10 +128,12 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
 
         jLabel9.setText("Entrada:");
 
+        txtE3.setEditable(false);
         txtE3.setToolTipText("Insira o arquivo (.txt) da entrada do caso de teste 3");
 
         jLabel10.setText("Saída:");
 
+        txtS3.setEditable(false);
         txtS3.setToolTipText("Insira o arquivo (.txt) da saída do caso de teste 3");
 
         jButton1.setText("Cadastrar");
@@ -147,11 +157,11 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Nome", "Enunciado", "Entrada 1", "Saída 1", "Entrada 2", "Saída 2", "Entrada 3", "Saída 3"
+                "Nome", "Enunciado", "Entrada 1", "Saída 1", "Entrada 2", "Saída 2", "Entrada 3", "Saída 3"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -426,6 +436,10 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       if(txtNome.getText().isEmpty()){
+           JOptionPane.showMessageDialog(this, "Informe um nome para a questão!");
+           return;
+       }
        Questoes q = new Questoes();
        QuestoesDAO dao = new QuestoesDAO();
        
@@ -510,54 +524,78 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        JFileChooser arquivo = new JFileChooser();
-        arquivo.showOpenDialog(null);
-        txtEnunciado.setText(arquivo.getSelectedFile().getAbsolutePath());
-        this.enunciado = arquivo.getSelectedFile().getName();
+
+        if (arquivo.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            txtEnunciado.setText(arquivo.getSelectedFile().getAbsolutePath());
+            this.enunciado = arquivo.getSelectedFile().getName();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um arquivo!");
+        }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        JFileChooser arquivo = new JFileChooser();
-        arquivo.showOpenDialog(null);
-        txtE1.setText(arquivo.getSelectedFile().getAbsolutePath());
-        this.entrada1 = arquivo.getSelectedFile().getName();
+     
+        if (arquivo.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            txtE1.setText(arquivo.getSelectedFile().getAbsolutePath());
+            this.entrada1 = arquivo.getSelectedFile().getName();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um arquivo!");
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        JFileChooser arquivo = new JFileChooser();
-        arquivo.showOpenDialog(null);
-        txtS1.setText(arquivo.getSelectedFile().getAbsolutePath());
-        this.saida1 = arquivo.getSelectedFile().getName();
+        
+        if (arquivo.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            txtS1.setText(arquivo.getSelectedFile().getAbsolutePath());
+            this.saida1 = arquivo.getSelectedFile().getName();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um arquivo!");
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
                                         
-        JFileChooser arquivo = new JFileChooser();
-        arquivo.showOpenDialog(null);
-        txtE2.setText(arquivo.getSelectedFile().getAbsolutePath());
-        this.entrada2 = arquivo.getSelectedFile().getName();
+       
+        if (arquivo.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            txtE2.setText(arquivo.getSelectedFile().getAbsolutePath());
+            this.entrada2 = arquivo.getSelectedFile().getName();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um arquivo!");
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        JFileChooser arquivo = new JFileChooser();
-        arquivo.showOpenDialog(null);
-        txtS2.setText(arquivo.getSelectedFile().getAbsolutePath());
-        this.saida2 = arquivo.getSelectedFile().getName();
+    
+        if (arquivo.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            txtS2.setText(arquivo.getSelectedFile().getAbsolutePath());
+            this.saida2 = arquivo.getSelectedFile().getName();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um arquivo!");
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        JFileChooser arquivo = new JFileChooser();
-        arquivo.showOpenDialog(null);
-        txtE3.setText(arquivo.getSelectedFile().getAbsolutePath());
-        this.entrada3 = arquivo.getSelectedFile().getName();
+        
+        if (arquivo.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            txtE3.setText(arquivo.getSelectedFile().getAbsolutePath());
+            this.entrada3 = arquivo.getSelectedFile().getName();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um arquivo!");
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        JFileChooser arquivo = new JFileChooser();
-        arquivo.showOpenDialog(null);
-        txtS3.setText(arquivo.getSelectedFile().getAbsolutePath());
-        this.saida3 = arquivo.getSelectedFile().getName();
+        
+        if (arquivo.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            txtS3.setText(arquivo.getSelectedFile().getAbsolutePath());
+            this.saida3 = arquivo.getSelectedFile().getName();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um arquivo!");
+        }
     }//GEN-LAST:event_jButton10ActionPerformed
+    
+ 
+    
     public void readJTable(){
         DefaultTableModel modelo = (DefaultTableModel) TabelaQuestoes.getModel();
         modelo.setNumRows(0);
