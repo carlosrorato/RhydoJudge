@@ -12,7 +12,6 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.dao.SubmissaoDAO;
 import model.dao.TempoDAO;
 import model.dao.UsuarioDAO;
 
@@ -406,10 +405,8 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         TempoDAO tdao = new TempoDAO();
-        SubmissaoDAO sdao = new SubmissaoDAO();
         try {
             int tempo = Integer.parseInt(JOptionPane.showInputDialog("Informe o tempo máximo\npara a submissão das soluções (em minutos):"));
-            sdao.setHabilitado(true);
             tdao.setTempoSub(tempo * 60);//guardando tempo em segundos
             JOptionPane.showMessageDialog(this, "Tempo de "+tempo+" minutos definido com sucesso!");
         } catch (NumberFormatException ex) {

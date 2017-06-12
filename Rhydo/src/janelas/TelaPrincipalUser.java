@@ -5,13 +5,12 @@
  */
 package janelas;
 
-import java.awt.Dimension;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JOptionPane;
-import model.dao.SubmissaoDAO;
 import model.dao.TempoDAO;
 import model.dao.UsuarioDAO;
 
@@ -20,10 +19,11 @@ import model.dao.UsuarioDAO;
  * @author carlosrorato
  */
 public class TelaPrincipalUser extends javax.swing.JFrame {
+    
 
     public TelaPrincipalUser() {
         initComponents();
-        submSolEnable();
+        jMenuItem7.setEnabled(true);
         contadorTempo();
         txtNome.setText(System.getProperty("login", ""));
         imprimirScoreLoop();
@@ -341,22 +341,6 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
         new SubmeterSolucao().setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void submSolEnable() {
-        SubmissaoDAO subDao = new SubmissaoDAO();
-        int delay = 1000;   // delay de 1 seg.
-        int interval = 1000;  // intervalo de 1 seg.
-        Timer timer = new Timer();
-
-        jMenuItem7.setEnabled(true);
-        subDao.setHabilitado(true);
-
-        timer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                jMenuItem7.setEnabled(subDao.getHabilitado());
-            }
-        }, delay, interval);
-
-    }
 
     private void contadorTempo() {
 
@@ -375,7 +359,6 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
 
     public void ImprimirTempo() {
         TempoDAO tdao = new TempoDAO();
-        SubmissaoDAO sdao = new SubmissaoDAO();
         int hora = 0, minuto = 0, tempo = 0, segundo = 0;
         tempo = tdao.getTempoSub();
         hora = tempo / 3600;
@@ -383,7 +366,7 @@ public class TelaPrincipalUser extends javax.swing.JFrame {
         segundo = (tempo % 3600) % 60;
         mostrador_tempo.setText(hora + "h  " + minuto + "min  " + segundo + "seg");
         if (tempo == 0) {
-            sdao.setHabilitado(false);
+            jMenuItem7.setEnabled(false);
             return;
         }
 

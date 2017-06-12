@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class TempoDAO {
 
@@ -30,7 +31,7 @@ public class TempoDAO {
                 if(segundos > 0) return segundos;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(SubmissaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Erro ao consultar o tempo de submissão: "+ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
@@ -54,7 +55,7 @@ public class TempoDAO {
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
-            Logger.getLogger(SubmissaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Erro ao definir o tempo de submissão: "+ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
