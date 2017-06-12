@@ -430,8 +430,9 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (txtNome.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Informe um nome para a questão!");
+        if (txtNome.getText().isEmpty() || txtE1.getText().isEmpty() || txtE2.getText().isEmpty() || txtE3.getText().isEmpty() || 
+                txtS1.getText().isEmpty() || txtS2.getText().isEmpty() || txtS3.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
             return;
         }
         Questoes q = new Questoes();
@@ -454,10 +455,10 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
             copy(e2, new File("./quest/" + txtNome.getText() + "/" + e2.getName()));
             copy(e3, new File("./quest/" + txtNome.getText() + "/" + e3.getName()));
             copy(s1, new File("./quest/" + txtNome.getText() + "/" + s1.getName()));
-            copy(s2, new File("./quest/" + txtNome.getText() + "/" + s1.getName()));
-            copy(s3, new File("./quest/" + txtNome.getText() + "/" + s1.getName()));
+            copy(s2, new File("./quest/" + txtNome.getText() + "/" + s2.getName()));
+            copy(s3, new File("./quest/" + txtNome.getText() + "/" + s3.getName()));
         } catch (IOException ex) {
-            Logger.getLogger(GerenciarQuestoes.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Problema na cópia dos arquivos: "+ex);
         }
 
         q.setNome(txtNome.getText());

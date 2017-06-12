@@ -407,11 +407,15 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         TempoDAO tdao = new TempoDAO();
         SubmissaoDAO sdao = new SubmissaoDAO();
-        int tempo = Integer.parseInt(JOptionPane.showInputDialog("Informe o tempo máximo\npara a submissão das soluções (em minutos):"));
-        if(tempo>0){
+        try {
+            int tempo = Integer.parseInt(JOptionPane.showInputDialog("Informe o tempo máximo\npara a submissão das soluções (em minutos):"));
             sdao.setHabilitado(true);
+            tdao.setTempoSub(tempo * 60);//guardando tempo em segundos
+            JOptionPane.showMessageDialog(this, "Tempo de "+tempo+" minutos definido com sucesso!");
+        } catch (NumberFormatException ex) {
         }
-        tdao.setTempoSub(tempo*60);//guardando tempo em segundos
+
+        
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
