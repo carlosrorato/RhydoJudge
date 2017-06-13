@@ -152,11 +152,11 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Enunciado", "Entrada 1", "Saída 1", "Entrada 2", "Saída 2", "Entrada 3", "Saída 3"
+                "Id", "Nome", "Enunciado", "Entrada 1", "Saída 1", "Entrada 2", "Saída 2", "Entrada 3", "Saída 3"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                true, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

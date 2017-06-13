@@ -84,62 +84,112 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Rhydo 1.0 - Administrador");
+        setResizable(false);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo.png"))); // NOI18N
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         mostrador_tempo.setFont(new java.awt.Font("Ubuntu", 0, 30)); // NOI18N
+        mostrador_tempo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         mostrador_tempo.setText("--h --min");
+        mostrador_tempo.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Tempo restante:");
+        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("Bem vindo(a), ");
+        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         txtNome.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        txtNome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txtNome.setText("jLabel3");
+        txtNome.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("!");
+        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b12.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b13.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b14.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b15.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Score:");
+        jLabel6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         scoreRestante.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        scoreRestante.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         scoreRestante.setText("+20");
+        scoreRestante.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b10.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        b11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         b11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/balao.png"))); // NOI18N
+        b11.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("Total de Submissões:");
+        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         totalSub.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        totalSub.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         totalSub.setText("00");
+        totalSub.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         jMenu3.setText("Usuários");
         jMenu3.setToolTipText("");
@@ -263,55 +313,59 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
                         .addComponent(txtNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(745, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(mostrador_tempo, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(b1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b6)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(mostrador_tempo, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 414, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(22, 22, 22))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(b1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(scoreRestante, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(b15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(scoreRestante, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 205, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(35, 35, 35))))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(totalSub)
-                .addGap(740, 740, 740))
+                .addContainerGap(740, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,14 +400,14 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(totalSub))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mostrador_tempo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
-                .addGap(27, 27, 27))
+                        .addComponent(mostrador_tempo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(40, 40, 40))
         );
 
         pack();

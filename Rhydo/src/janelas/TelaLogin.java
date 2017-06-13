@@ -19,6 +19,7 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public TelaLogin() {
         initComponents();
+        this.getRootPane().setDefaultButton(jButton1);
     }
 
     /**
@@ -36,14 +37,13 @@ public class TelaLogin extends javax.swing.JFrame {
         txtLogin = new javax.swing.JTextField();
         txtSenha = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
-        opUser = new javax.swing.JRadioButton();
-        opAdmin = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Rhydo 1.0 - Login");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImages(null);
+        setResizable(false);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/logo.png"))); // NOI18N
@@ -64,22 +64,6 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
-        opUser.setText("Usuário");
-        opUser.setToolTipText("Você é um usuário?");
-        opUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opUserActionPerformed(evt);
-            }
-        });
-
-        opAdmin.setText("Administrador");
-        opAdmin.setToolTipText("Você é um administrador?");
-        opAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opAdminActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("URW Palladio L", 1, 12)); // NOI18N
         jLabel2.setText("1.0");
 
@@ -88,52 +72,48 @@ public class TelaLogin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(79, 79, 79)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addGap(90, 90, 90))
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4))
-                                .addGap(2, 2, 2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtLogin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(opUser)
-                            .addComponent(opAdmin))))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addComponent(jLabel4)
+                        .addGap(8, 8, 8)
+                        .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(3, 3, 3)
+                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGap(20, 20, 20)
                         .addComponent(jLabel2)))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opUser))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opAdmin))
-                .addGap(54, 54, 54)
+                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel5))
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addComponent(jButton1)
-                .addGap(0, 68, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         pack();
@@ -142,36 +122,28 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         UsuarioDAO dao = new UsuarioDAO();
-        
+
         System.setProperty("login", txtLogin.getText());
- 
-        
-        if(opAdmin.isSelected()==true && opUser.isSelected()==true) JOptionPane.showMessageDialog(null,"Escolha entre Usuário e Administrador!");
-        else if(opAdmin.isSelected()==true){
-            //logar como administrador
-            if(dao.checkLogin(txtLogin.getText(),txtSenha.getText(),1)==true){
-                new TelaPrincipalAdmin().setVisible(true);
-                JOptionPane.showMessageDialog(null,"Logado como ADMINISTRADOR!");
-                this.dispose();
-            }else JOptionPane.showMessageDialog(null,"Login ou senha incorretos!");
-        }else{
-            //logar como usuário
-            if(dao.checkLogin(txtLogin.getText(),txtSenha.getText(),2)==true){
-                new TelaPrincipalUser().setVisible(true);
-                JOptionPane.showMessageDialog(null,"Logado como USUÁRIO!");
-                this.dispose();
-            }else JOptionPane.showMessageDialog(null,"Login ou senha incorretos!");
+
+        if (txtLogin.getText().isEmpty() || txtSenha.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+            return;
         }
 
+        if (dao.checkLogin(txtLogin.getText(), txtSenha.getText(), 1) == true) {
+            new TelaPrincipalAdmin().setVisible(true);
+            JOptionPane.showMessageDialog(null, "Logado como ADMINISTRADOR!");
+            this.dispose();
+        } else if (dao.checkLogin(txtLogin.getText(), txtSenha.getText(), 2) == true) {
+            new TelaPrincipalUser().setVisible(true);
+            JOptionPane.showMessageDialog(null, "Logado como USUÁRIO!");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Login ou senha incorretos!");
+        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void opUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opUserActionPerformed
-        opAdmin.setSelected(false);
-    }//GEN-LAST:event_opUserActionPerformed
-
-    private void opAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opAdminActionPerformed
-        opUser.setSelected(false);
-    }//GEN-LAST:event_opAdminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,8 +186,6 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JRadioButton opAdmin;
-    private javax.swing.JRadioButton opUser;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
