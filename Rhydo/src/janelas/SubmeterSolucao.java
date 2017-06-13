@@ -5,7 +5,9 @@
  */
 package janelas;
 
-import compilador.MainCompiler;
+import compilador.C;
+import compilador.Cpp;
+import compilador.Judge;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -63,12 +65,19 @@ public class SubmeterSolucao extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Submeter Solução");
+        setResizable(false);
 
         jLabel4.setText("Questão:");
 
         jLabel5.setText("Solução:");
 
+        txtSolucao.setEditable(false);
         txtSolucao.setToolTipText("Informe o nome do arquivo da solução");
+        txtSolucao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSolucaoActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
         jLabel6.setText("Sistema RhydoJudgeBeta 1.0");
@@ -233,18 +242,26 @@ public class SubmeterSolucao extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Problema ao copiar arquivo: "+ex);
         }
         
-        MainCompiler compilador = new MainCompiler();
+        
         UsuarioDAO dao = new UsuarioDAO();
         QuestoesDAO qdao = new QuestoesDAO();
         Questoes q = new Questoes();
-        int exValC,exValR1,exValR2,exValR3,flag=0;
+        int exValC=-2,exValR1,exValR2,exValR3,flag=0;
         
         //incrementar a submissão no banco de dados
         dao.adicionaSubmissao(System.getProperty("login"));
         try {
             //tentar compilar
-
-            exValC = compilador.Compilador("./Judge/"+this.nome,opLinguagem.getItemAt(opLinguagem.getSelectedIndex()));
+            C comp1 = new C();
+            Cpp comp2 = new Cpp();
+            if (opLinguagem.getItemAt(opLinguagem.getSelectedIndex()).equals("C")){
+                
+                exValC = comp1.Compilador("./Judge/"+this.nome);
+            } else if(opLinguagem.getItemAt(opLinguagem.getSelectedIndex()).equals("C++")){
+                
+                exValC = comp2.Compilador("./Judge/"+this.nome);
+            }
+            
             
             if(exValC==1){
                 resultado.setText("NO - COMPILATION ERROR");
@@ -253,7 +270,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                 q = qdao.obterQuestao(comboNomeQuest.getItemAt(comboNomeQuest.getSelectedIndex()));
                 //executar teste de caso 1
 
-                exValR1 = compilador.Runner(q.getEntrada1(), q.getSaida1());
+                exValR1 = comp1.Runner(q.getEntrada1(), q.getSaida1());
                 if(exValR1==2){
                     resultado.setText("NO - WRONG ANSWER");
                     balao.setVisible(false);
@@ -261,7 +278,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                     if(exValR1==0) flag++;
                     //caso de teste 2
                     
-                    exValR2 = compilador.Runner(q.getEntrada2(), q.getSaida2());
+                    exValR2 = comp1.Runner(q.getEntrada2(), q.getSaida2());
                     if(exValR2==2){
                         resultado.setText("NO - WRONG ANSWER");
                         balao.setVisible(false);
@@ -269,7 +286,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                         if(exValR2==0) flag++;
                         //caso de teste 3
                         
-                        exValR3 = compilador.Runner(q.getEntrada3(), q.getSaida3());
+                        exValR3 = comp1.Runner(q.getEntrada3(), q.getSaida3());
                         if(exValR3==2){
                             resultado.setText("NO - WRONG ANSWER");
                             balao.setVisible(false);
@@ -305,6 +322,10 @@ public class SubmeterSolucao extends javax.swing.JFrame {
     private void comboNomeQuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNomeQuestActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboNomeQuestActionPerformed
+
+    private void txtSolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSolucaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSolucaoActionPerformed
 
     /**
      * @param args the command line arguments

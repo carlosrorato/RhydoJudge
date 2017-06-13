@@ -1,12 +1,21 @@
 
 package model.bean;
 
-public class Usuario extends Cadastro{
+public class Usuario {
     private String login;
     private String senha;
     private int tipo;
     private int score;
     private int totalSub;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getLogin() {
         return login;

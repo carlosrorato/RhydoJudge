@@ -1,7 +1,7 @@
 
 package model.bean;
 
-public class Questoes extends Cadastro{
+public class Questoes {
     private String nome;
     private String enunciado;
     private String entrada1;
@@ -10,7 +10,16 @@ public class Questoes extends Cadastro{
     private String saida1;
     private String saida2;
     private String saida3;
+    private int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getNome() {
         return nome;
     }

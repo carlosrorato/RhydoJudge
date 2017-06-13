@@ -16,31 +16,8 @@ import java.util.logging.Logger;
  *
  * @author carlosrorato
  */
-public class MainCompiler {
-    
-    public int Compilador(String caminho, String linguagem) throws IOException
-    {
-        Runtime rt = Runtime.getRuntime();
-        
-        String comando;
-        
-        if(linguagem.equals("C")) comando = String.format("gcc %s -o temp -lm", caminho);
-        else if(linguagem.equals("C++")) comando = String.format("g++ %s -o temp", caminho);
-        else comando = "";
-        
-        Process p = rt.exec(comando);
-        int val=0;
-        try {
-            val = p.waitFor();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MainCompiler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(val == 0)
-        {
-            return 0; //deu certo a compilação
-        }
-        return 1; //deu errado a compilação
-    }
+public class Judge {
+
  
     public int comparar(String a, String b) //função que compara, caractere a caractere
     {
@@ -77,7 +54,7 @@ public class MainCompiler {
         try {
             Runtime.getRuntime().exec(new String[] { "bash", "-c", comando}).waitFor(); //ele roda o comando em um terminal bash e espera que o comando seja finalizado
         } catch (InterruptedException ex) {
-            Logger.getLogger(MainCompiler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Judge.class.getName()).log(Level.SEVERE, null, ex);
         }
         
 
