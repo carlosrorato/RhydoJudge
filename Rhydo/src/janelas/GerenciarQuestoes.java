@@ -20,8 +20,8 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import model.bean.Questoes;
-import model.dao.QuestoesDAO;
+import model.bean.Questao;
+import model.dao.QuestaoDAO;
 
 /**
  *
@@ -425,19 +425,23 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
         }
         in.close();
         out.close();
-        Long time = new Date().getTime() - date.getTime();
-        System.out.println("Saiu copy" + time);
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Questao q = new Questao();
+        QuestaoDAO dao = new QuestaoDAO();
+        
         if (txtNome.getText().isEmpty() || txtE1.getText().isEmpty() || txtE2.getText().isEmpty() || txtE3.getText().isEmpty() || 
                 txtS1.getText().isEmpty() || txtS2.getText().isEmpty() || txtS3.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
             return;
         }
-        Questoes q = new Questoes();
-        QuestoesDAO dao = new QuestoesDAO();
-
+        
+        if(dao.check(txtNome.getText())==true){
+           JOptionPane.showMessageDialog(this, "Não é permitido cadastrar mais de uma questão com mesmo nome!");
+           return; 
+        }
+        
         new File("./quest/" + txtNome.getText()).mkdir(); //cria uma pasta com o nome da questão
 
         //Copia os arquivos para essa pasta
@@ -487,8 +491,8 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (TabelaQuestoes.getSelectedRow() != -1) {
-            Questoes q = new Questoes();
-            QuestoesDAO dao = new QuestoesDAO();
+            Questao q = new Questao();
+            QuestaoDAO dao = new QuestaoDAO();
 
             new File(txtEnunciado.getText()).delete();
             new File(txtE1.getText()).delete();
@@ -556,9 +560,9 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
     public void readJTable() {
         DefaultTableModel modelo = (DefaultTableModel) TabelaQuestoes.getModel();
         modelo.setNumRows(0);
-        QuestoesDAO qdao = new QuestoesDAO();
+        QuestaoDAO qdao = new QuestaoDAO();
 
-        for (Questoes q : qdao.read()) {
+        for (Questao q : qdao.read()) {
             modelo.addRow(new Object[]{
                 q.getId(), q.getNome(), q.getEnunciado(), q.getEntrada1(), q.getEntrada2(), q.getEntrada3(), q.getSaida1(), q.getSaida2(), q.getSaida3()
             });

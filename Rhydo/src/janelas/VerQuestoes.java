@@ -10,8 +10,8 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import model.bean.Questoes;
-import model.dao.QuestoesDAO;
+import model.bean.Questao;
+import model.dao.QuestaoDAO;
 
 /**
  *
@@ -88,9 +88,9 @@ public class VerQuestoes extends javax.swing.JFrame {
 
     private void TabelaQuestoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaQuestoesMouseClicked
         //abrir o pdf da questão
-        QuestoesDAO qdao = new QuestoesDAO();
+        QuestaoDAO qdao = new QuestaoDAO();
         String nome;
-        Questoes q;
+        Questao q;
         nome = TabelaQuestoes.getValueAt(TabelaQuestoes.getSelectedRow(),0).toString();
         q = qdao.obterQuestao(nome);
         
@@ -103,9 +103,9 @@ public class VerQuestoes extends javax.swing.JFrame {
     public void readJTable(){
         DefaultTableModel modelo = (DefaultTableModel) TabelaQuestoes.getModel();
         modelo.setNumRows(0);
-        QuestoesDAO qdao = new QuestoesDAO();
+        QuestaoDAO qdao = new QuestaoDAO();
         
-        for(Questoes q: qdao.read()){
+        for(Questao q: qdao.read()){
             modelo.addRow(new Object[]{
                 q.getNome()
             });

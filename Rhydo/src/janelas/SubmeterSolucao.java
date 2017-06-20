@@ -19,8 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import model.bean.Questoes;
-import model.dao.QuestoesDAO;
+import model.bean.Questao;
+import model.dao.QuestaoDAO;
 import model.dao.UsuarioDAO;
 
 /**
@@ -227,8 +227,6 @@ public class SubmeterSolucao extends javax.swing.JFrame {
         }
         in.close();
         out.close();
-        Long time = new Date().getTime() - date.getTime();
-        System.out.println("Saiu copy"+time);
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -244,8 +242,8 @@ public class SubmeterSolucao extends javax.swing.JFrame {
         
         
         UsuarioDAO dao = new UsuarioDAO();
-        QuestoesDAO qdao = new QuestoesDAO();
-        Questoes q = new Questoes();
+        QuestaoDAO qdao = new QuestaoDAO();
+        Questao q = new Questao();
         int exValC=-2,exValR1,exValR2,exValR3,flag=0;
         
         //incrementar a submissão no banco de dados
@@ -313,9 +311,9 @@ public class SubmeterSolucao extends javax.swing.JFrame {
         this.nome = arquivo.getSelectedFile().getName();
     }//GEN-LAST:event_jButton11ActionPerformed
     private void readCombo(){
-        QuestoesDAO qdao = new QuestoesDAO();
+        QuestaoDAO qdao = new QuestaoDAO();
         
-        for(Questoes q: qdao.read()){
+        for(Questao q: qdao.read()){
             comboNomeQuest.addItem(q.getNome());
         }
     }

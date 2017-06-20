@@ -24,7 +24,7 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
         initComponents();
         DefaultTableModel modelo = (DefaultTableModel) TabelaUsuario.getModel();
         TabelaUsuario.setRowSorter(new TableRowSorter(modelo));
-        
+
         readJTable();
     }
 
@@ -48,9 +48,9 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaUsuario = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
         spinnerScore = new javax.swing.JSpinner();
         spinnerTotalSub = new javax.swing.JSpinner();
 
@@ -111,27 +111,27 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TabelaUsuario);
 
-        jButton1.setText("Cadastrar");
-        jButton1.setToolTipText("Cadastrar usuário");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setToolTipText("Cadastrar usuário");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCadastrarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Excluir");
-        jButton2.setToolTipText("Excluir usuário selecionado");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setText("Excluir");
+        btnExcluir.setToolTipText("Excluir usuário selecionado");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Atualizar");
-        jButton3.setToolTipText("Atualizar usuário");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.setToolTipText("Atualizar usuário");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnAtualizarActionPerformed(evt);
             }
         });
 
@@ -178,11 +178,11 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
                                             .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jButton1)
+                                .addComponent(btnCadastrar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 15, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -208,9 +208,9 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
                     .addComponent(spinnerTotalSub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnCadastrar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnAtualizar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -219,28 +219,38 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    public void readJTable(){
+    public void readJTable() {
         DefaultTableModel modelo = (DefaultTableModel) TabelaUsuario.getModel();
         modelo.setNumRows(0);
         UsuarioDAO udao = new UsuarioDAO();
-        
-        for(Usuario u: udao.read()){
+
+        for (Usuario u : udao.read()) {
             modelo.addRow(new Object[]{
-                u.getId(),u.getLogin(),u.getSenha(),u.getTipo(),u.getScore(),u.getTotalSub()
+                u.getId(), u.getLogin(), u.getSenha(), u.getTipo(), u.getScore(), u.getTotalSub()
             });
         }
-        
+
     }
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       Usuario u = new Usuario();
-       UsuarioDAO dao = new UsuarioDAO();
-       
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        if (txtLogin.getText().isEmpty() || txtSenha.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Os campos de login e senha são obrigatórios!");
+            return;
+        }
+
+        Usuario u = new Usuario();
+        UsuarioDAO dao = new UsuarioDAO();
+
         if (opAdmin.isSelected() == true && opUser.isSelected() == true) {
-            JOptionPane.showMessageDialog(null,"Escolha entre Usuário e Administrador!");
+            JOptionPane.showMessageDialog(this, "Escolha entre Usuário e Administrador!");
+        } else if (dao.check(txtLogin.getText()) == true) {
+            JOptionPane.showMessageDialog(this, "Não é permitido cadastrar mais de um usuário com mesmo login!");
         } else {
-            if(opAdmin.isSelected() == true) u.setTipo(1);
-            else u.setTipo(2);
+            if (opAdmin.isSelected() == true) {
+                u.setTipo(1);
+            } else {
+                u.setTipo(2);
+            }
             u.setLogin(txtLogin.getText());
             u.setSenha(txtSenha.getText());
             u.setScore((Integer) spinnerScore.getValue());
@@ -254,21 +264,21 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
             spinnerTotalSub.setValue(0);
             opAdmin.setSelected(false);
             opUser.setSelected(false);
-            
+
             readJTable();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void opAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opAdminActionPerformed
         opUser.setSelected(false);
     }//GEN-LAST:event_opAdminActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if (TabelaUsuario.getSelectedRow() != -1) {
             Usuario u = new Usuario();
             UsuarioDAO dao = new UsuarioDAO();
 
-            u.setId(Integer.parseInt(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(),0).toString()));
+            u.setId(Integer.parseInt(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 0).toString()));
             dao.delete(u);
 
             txtLogin.setText("");
@@ -280,7 +290,7 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
 
             readJTable();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void TabelaUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaUsuarioMouseClicked
         if (TabelaUsuario.getSelectedRow() != -1) {
@@ -299,19 +309,22 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_TabelaUsuarioMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(TabelaUsuario.getSelectedRow() != -1){
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        if (TabelaUsuario.getSelectedRow() != -1) {
             Usuario u = new Usuario();
             UsuarioDAO dao = new UsuarioDAO();
-            
-            u.setId(Integer.parseInt(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(),0).toString()));
+
+            u.setId(Integer.parseInt(TabelaUsuario.getValueAt(TabelaUsuario.getSelectedRow(), 0).toString()));
             u.setLogin(txtLogin.getText());
             u.setSenha(txtSenha.getText());
             u.setScore((Integer) spinnerScore.getValue());
             u.setTotalSub((Integer) spinnerTotalSub.getValue());
-            if(opAdmin.isSelected() == true) u.setTipo(1);
-            else u.setTipo(2); 
-            
+            if (opAdmin.isSelected() == true) {
+                u.setTipo(1);
+            } else {
+                u.setTipo(2);
+            }
+
             dao.update(u);
 
             txtLogin.setText("");
@@ -321,10 +334,10 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
             opAdmin.setSelected(false);
             opUser.setSelected(false);
 
-            readJTable(); 
-            
+            readJTable();
+
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void opUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opUserActionPerformed
         opAdmin.setSelected(false);
@@ -367,9 +380,9 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TabelaUsuario;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
