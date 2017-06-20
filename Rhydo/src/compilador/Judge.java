@@ -75,6 +75,11 @@ public class Judge {
             tamanho++;
         }
         
+        saida1.close();
+        saida2.close();
+        lerArq1.close();
+        lerArq2.close();
+        
         if(flag1==tamanho) return 0; //YES
         else if(flag1+flag2 == tamanho) return 1; //YES - PRESENTATION ERROR
         else return 2; //NO - WRONG ANSWER

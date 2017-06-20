@@ -29,7 +29,7 @@ import model.dao.QuestaoDAO;
  */
 public class GerenciarQuestoes extends javax.swing.JFrame {
 
-    JFileChooser arquivo = new JFileChooser();
+    JFileChooser pesquisarArquivo = new JFileChooser();
 
     /**
      * Creates new form GerenciarQuestoes
@@ -486,7 +486,7 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
         txtS3.setText("");
 
         readJTable();
-
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -549,9 +549,9 @@ public class GerenciarQuestoes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     public void escolherArquivo(JTextField caixaTexto, String extensao) {
-        arquivo.setFileFilter(new FileNameExtensionFilter(extensao,extensao));
-        if (arquivo.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            caixaTexto.setText(arquivo.getSelectedFile().getAbsolutePath());
+        pesquisarArquivo.setFileFilter(new FileNameExtensionFilter(extensao,extensao));
+        if (pesquisarArquivo.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            caixaTexto.setText(pesquisarArquivo.getSelectedFile().getAbsolutePath());
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um arquivo!");
         }

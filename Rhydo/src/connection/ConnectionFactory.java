@@ -38,11 +38,13 @@ public class ConnectionFactory {
             ConnectionFactory.URL = lerArq.readLine();
             ConnectionFactory.USER = lerArq.readLine();
             ConnectionFactory.PASS = lerArq.readLine();
+            conf.close();
             
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null,"Erro ao abrir o arquivo config.txt");
         }
         
+       
     }
     
     public static Connection getConnection(){ 
