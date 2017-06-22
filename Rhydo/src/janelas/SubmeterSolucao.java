@@ -138,7 +138,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
 
         jLabel1.setText("Linguagem:");
 
-        opLinguagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "        ", "C", "C++" }));
+        opLinguagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "C", "C++" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -230,14 +230,25 @@ public class SubmeterSolucao extends javax.swing.JFrame {
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+        if(opLinguagem.getItemAt(opLinguagem.getSelectedIndex()).isEmpty()){
+            JOptionPane.showMessageDialog(this, "Selecione uma linguagem de programação!");
+            return;
+        }
+        if(comboNomeQuest.getItemAt(comboNomeQuest.getSelectedIndex()).equals(" ")){
+            JOptionPane.showMessageDialog(this, "Selecione uma questão!");
+            return;
+        }
+        if(txtSolucao.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Selecione um arquivo para submeter!");
+            return;
+        }
         //cópia do arquivo para a pasta judge
         File sol = new File(txtSolucao.getText());
         
         try{
             copy(sol,new File("./Judge/"+this.nome));
         }catch(IOException ex){
-            JOptionPane.showMessageDialog(rootPane, "Problema ao copiar arquivo: "+ex);
+            JOptionPane.showMessageDialog(this, "Problema ao copiar arquivo: "+ex);
         }
         
         

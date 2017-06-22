@@ -240,8 +240,11 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
 
         Usuario u = new Usuario();
         UsuarioDAO dao = new UsuarioDAO();
-
-        if (opAdmin.isSelected() == true && opUser.isSelected() == true) {
+        
+        if ((Integer) spinnerScore.getValue() > (Integer) spinnerTotalSub.getValue()){
+            JOptionPane.showMessageDialog(this, "O score deve ser menor ou igual ao total de submissões!");
+        }
+        else if ((opAdmin.isSelected() == true && opUser.isSelected() == true)||(opAdmin.isSelected() == false && opUser.isSelected() == false)) {
             JOptionPane.showMessageDialog(this, "Escolha entre Usuário e Administrador!");
         } else if (dao.check(txtLogin.getText()) == true) {
             JOptionPane.showMessageDialog(this, "Não é permitido cadastrar mais de um usuário com mesmo login!");
@@ -310,6 +313,11 @@ public class GerenciarUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_TabelaUsuarioMouseClicked
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        if ((Integer) spinnerScore.getValue() > (Integer) spinnerTotalSub.getValue()){
+            JOptionPane.showMessageDialog(this, "O score deve ser menor ou igual ao total de submissões!");
+            return;
+        }
+        
         if (TabelaUsuario.getSelectedRow() != -1) {
             Usuario u = new Usuario();
             UsuarioDAO dao = new UsuarioDAO();
