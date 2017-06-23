@@ -285,6 +285,11 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                     balao.setVisible(false);
                 }else{
                     if(exValR1==0) flag++;
+                    else if(exValR1 == 3)
+                    {
+                        resultado.setText("NO - TIMEOUT");
+                        balao.setVisible(false);
+                    }
                     //caso de teste 2
                     
                     exValR2 = comp1.Runner(q.getEntrada2(), q.getSaida2());
@@ -293,14 +298,24 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                         balao.setVisible(false);
                     }else{
                         if(exValR2==0) flag++;
+                        else if(exValR2 == 3)
+                        {
+                            resultado.setText("NO - TIMEOUT");
+                            balao.setVisible(false);
+                        }
                         //caso de teste 3
                         
                         exValR3 = comp1.Runner(q.getEntrada3(), q.getSaida3());
                         if(exValR3==2){
                             resultado.setText("NO - WRONG ANSWER");
                             balao.setVisible(false);
+                        }
+                        else if(exValR3 == 3)
+                        {
+                            resultado.setText("NO - TIMEOUT");
+                            balao.setVisible(false);
                         }else{
-                            if(exValR3==0) flag=flag+1;
+                            if(exValR3==0) flag++;
                             balao.setVisible(true);
                             if(flag==3) resultado.setText("YES");
                             else resultado.setText("YES - PRESENTATION ERROR");
