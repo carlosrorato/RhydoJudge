@@ -80,6 +80,7 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -238,16 +239,19 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem8);
 
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("Logout");
+
         jMenuItem7.setText("Logout");
-        jMenuItem7.setToolTipText("Sair do sistema");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem7);
+        jMenu5.add(jMenuItem7);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
 
@@ -385,13 +389,6 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
         new GerenciarQuestoes().setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        
-        JOptionPane.showMessageDialog(null,"Sessão Encerrada!");
-        new TelaLogin().setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         new SubmeterSolucao().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -419,6 +416,12 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         new VerQuestoes().setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        JOptionPane.showMessageDialog(null,"Sessão Encerrada!");
+        new TelaLogin().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void contadorTempo() {
 
@@ -731,6 +734,7 @@ public class TelaPrincipalAdmin extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem11;
