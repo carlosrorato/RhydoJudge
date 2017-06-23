@@ -1,4 +1,4 @@
 com.mysql.jdbc.Driver
 jdbc:mysql://localhost:3306/rhydo?useSSL=false
-root
-acq1305
+//Informe aqui seu usuário root
+//Informe aqui sua senha root
