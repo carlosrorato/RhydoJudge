@@ -50,14 +50,31 @@ public class Judge {
         String comando, resposta, saida;
         
         comando = "./temp < " + input + " > saida.txt";
+        /*Tirou o waitfor*/
+        //try {
+        Process p = Runtime.getRuntime().exec(new String[] { "bash", "-c", comando}); //ele roda o comando em um terminal bash e espera que o comando seja finalizado
+        //} catch (InterruptedException ex) {
+        //    Logger.getLogger(Judge.class.getName()).log(Level.SEVERE, null, ex);
+        //}
         
-        try {
-            Runtime.getRuntime().exec(new String[] { "bash", "-c", comando}).waitFor(); //ele roda o comando em um terminal bash e espera que o comando seja finalizado
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Judge.class.getName()).log(Level.SEVERE, null, ex);
+        int tempo = 0;
+        
+        while(p.isAlive() && tempo < 50){
+            
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Judge.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            tempo++;
+            
         }
-        
 
+        if(tempo == 50){
+            p.destroy();
+            return 3;//TIME OUT
+        }
        
         //leituar dos arquivos
         FileReader saida1 = new FileReader(output);
