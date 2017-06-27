@@ -287,7 +287,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                     if(exValR1==0) flag++;
                     else if(exValR1 == 3)
                     {
-                        resultado.setText("NO - TIMEOUT");
+                        resultado.setText("NO - TIME LIMIT EXCEEDED");
                         balao.setVisible(false);
                         return;
                     }
@@ -301,7 +301,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                         if(exValR2==0) flag++;
                         else if(exValR2 == 3)
                         {
-                            resultado.setText("NO - TIMEOUT");
+                            resultado.setText("NO - NO - TIME LIMIT EXCEEDED");
                             balao.setVisible(false);
                             return;
                         }
@@ -314,7 +314,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                         }
                         else if(exValR3 == 3)
                         {
-                            resultado.setText("NO - TIMEOUT");
+                            resultado.setText("NO - NO - TIME LIMIT EXCEEDED");
                             balao.setVisible(false);
                             return;
                         }else{
