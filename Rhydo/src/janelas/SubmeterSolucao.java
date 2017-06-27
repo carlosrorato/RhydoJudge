@@ -289,6 +289,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                     {
                         resultado.setText("NO - TIMEOUT");
                         balao.setVisible(false);
+                        return;
                     }
                     //caso de teste 2
                     
@@ -302,6 +303,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                         {
                             resultado.setText("NO - TIMEOUT");
                             balao.setVisible(false);
+                            return;
                         }
                         //caso de teste 3
                         
@@ -314,6 +316,7 @@ public class SubmeterSolucao extends javax.swing.JFrame {
                         {
                             resultado.setText("NO - TIMEOUT");
                             balao.setVisible(false);
+                            return;
                         }else{
                             if(exValR3==0) flag++;
                             balao.setVisible(true);
